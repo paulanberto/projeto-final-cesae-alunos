@@ -1,0 +1,15 @@
+
+.botaoPrincipal{
+    background-color: #392465;
+    color: white;
+    border: none;
+    padding: 6px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.fontePrincipal{
+    color: #392465;
+    font-weight: 650;
+    font-family:  sans-serif;
+}
