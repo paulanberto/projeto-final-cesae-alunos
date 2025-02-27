@@ -24,6 +24,10 @@
     <p class="fontePrincipal">texto com fonte principal</p>
     <h1 class="fontePrincipal">texto com a fonte certa</h1>
 
+    //fonte usada para os textos e titulos em bold
+    <p class="fonteBold">texto com fonte principal</p>
+    <h1 class="fonteBold">texto com a fonte certa</h1>
+
 </div>
 
 @endsection

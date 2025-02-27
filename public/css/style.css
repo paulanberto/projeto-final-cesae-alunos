@@ -8,8 +8,26 @@
     font-size: 16px;
 }
 
+@font-face {
+    font-family: 'ChakraPetch-Light';
+    src: url("../fontes/ChakraPetch-Light.ttf") format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'ChakraPetch-SemiBold';
+    src: url("../fontes/ChakraPetch-SemiBold.ttf") format('truetype');
+    font-weight: normal;
+}
+
 .fontePrincipal{
     color: #392465;
     font-weight: 650;
-    font-family:  sans-serif;
+    font-family: 'ChakraPetch-Light', sans-serif;
+}
+
+.fonteBold{
+    color: #392465;
+    font-weight: 650;
+    font-family: 'ChakraPetch-SemiBold', sans-serif;
 }
