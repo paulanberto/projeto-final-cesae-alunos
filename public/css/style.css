@@ -6,6 +6,7 @@
     padding: 6px;
     text-align: center;
     font-size: 16px;
+    font-family: 'ChakraPetch-Light', sans-serif;
 }
 
 @font-face {
@@ -48,7 +49,7 @@
     width: 100%;
     max-width: 300px;
     display: block;
-    margin: 20px auto; 
+    margin: 20px auto;
     text-align: center;
 }
 
@@ -70,4 +71,13 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+.botaoCancel{
+    background-color: white;
+    color: #392465;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'ChakraPetch-Light', sans-serif;
 }
