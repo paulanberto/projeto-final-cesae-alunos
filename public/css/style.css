@@ -1,10 +1,12 @@
-.botaoPrincipal {
+
+.botaoPrincipal{
     background-color: #392465;
     color: white;
     border: none;
     padding: 6px;
     text-align: center;
     font-size: 16px;
+    font-family: 'ChakraPetch-Light', sans-serif;
 }
 
 @font-face {
@@ -19,51 +21,63 @@
     font-weight: normal;
 }
 
-.fontePrincipal {
+.fontePrincipal{
     color: #392465;
     font-weight: 650;
     font-family: 'ChakraPetch-Light', sans-serif;
 }
 
-.fonteBold {
+.fonteBold{
     color: #392465;
     font-weight: 650;
     font-family: 'ChakraPetch-SemiBold', sans-serif;
 }
 
-
-
-/*
-
-=================================================================================
-
-sugestão para evitar o uso excessivo de classes e usar directamente as tags.
-Por exemplo, em x de .fontePrincipal e fonteBold, é mais simples fazer o seguinte:
-
-p {
-    color: #392465;
+.fonteLink{
+    color: #059AE1;
     font-weight: 650;
     font-family: 'ChakraPetch-Light', sans-serif;
 }
 
-
-quando usamos o <b>:
-
-b {
-    color: #392465;
-    font-weight: 650;
-    font-family: 'ChakraPetch-SemiBold', sans-serif;
+.botaoLogin{
+    background-color: #392465;
+    color: white;
+    border: none;
+    padding: 6px;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+    max-width: 300px;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
 }
 
-
-como a maior parte dos nossos bold's são usados em <h>´s, podemos fazer assim também:
-
-h1, h2, h3, h4, h5, h6 {
-    color: #392465;
-    font-weight: 650;
-    font-family: 'ChakraPetch-SemiBold', sans-serif;
+.imagem-background {
+    background-color: #F6F6F6;
+    background-image: url('/imagens/cesae_logo.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-right: 0;
+    margin-right: 0;
 }
 
-=================================================================================
+.h2-registo{
+    margin-top: 20px; /* Ajuste o valor conforme necessário */
+}
 
-*/
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.botaoCancel{
+    background-color: white;
+    color: #392465;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'ChakraPetch-Light', sans-serif;
+}
