@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TemaController;
+use App\Http\Controllers\ForumController;
 use App\Http\Controllers\DesignController;
 use App\Http\Controllers\MaterialController;
 
@@ -52,3 +53,12 @@ Route::post('/create-material', [MaterialController::class,'createMaterial'])->n
 //rota para deletar materiais
 Route::get('/delete-material/{id}', [MaterialController::class,'deleteMaterial'])->name('material.delete');
 //  });
+
+
+Route::prefix('forum')->group(function() {
+
+    Route::get('/', [ForumController::class, 'index'])->name('forum.index');
+
+    /* Route::get('/{id}') */
+
+});
