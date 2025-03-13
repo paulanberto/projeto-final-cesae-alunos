@@ -1,5 +1,4 @@
-
-.botaoPrincipal{
+.botaoPrincipal {
     background-color: #392465;
     color: white;
     border: none;
@@ -20,14 +19,51 @@
     font-weight: normal;
 }
 
-.fontePrincipal{
+.fontePrincipal {
     color: #392465;
     font-weight: 650;
     font-family: 'ChakraPetch-Light', sans-serif;
 }
 
-.fonteBold{
+.fonteBold {
     color: #392465;
     font-weight: 650;
     font-family: 'ChakraPetch-SemiBold', sans-serif;
 }
+
+
+
+/*
+
+=================================================================================
+
+sugestão para evitar o uso excessivo de classes e usar directamente as tags.
+Por exemplo, em x de .fontePrincipal e fonteBold, é mais simples fazer o seguinte:
+
+p {
+    color: #392465;
+    font-weight: 650;
+    font-family: 'ChakraPetch-Light', sans-serif;
+}
+
+
+quando usamos o <b>:
+
+b {
+    color: #392465;
+    font-weight: 650;
+    font-family: 'ChakraPetch-SemiBold', sans-serif;
+}
+
+
+como a maior parte dos nossos bold's são usados em <h>´s, podemos fazer assim também:
+
+h1, h2, h3, h4, h5, h6 {
+    color: #392465;
+    font-weight: 650;
+    font-family: 'ChakraPetch-SemiBold', sans-serif;
+}
+
+=================================================================================
+
+*/

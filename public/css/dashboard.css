@@ -1,0 +1,106 @@
+.dashboard-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.dashboard-card-area {
+    width: 800px;
+
+}
+
+
+.dashboard-img-and-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.img-profile-dashboard {
+    height: 120px;
+    width: 120px;
+    border-radius: 100%;
+    margin-top: 24px;
+}
+
+.img-change-dashboard-button {
+    margin: 16px 16px 4px 16px;
+}
+
+.card-body {
+    height: 100%;
+    padding: 24px 32px;
+    border-left: 1px solid #dee2e6;
+    align-content: center;
+    margin: auto;
+}
+
+.card-body ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.empty-space {
+    height: 24px;
+}
+
+i {
+    font-size: 64px;
+    padding: 24px 0;
+    color: #392465;
+    transition: color 0.3s ease;    
+}
+
+.card {
+    color: #392465;
+}
+
+.users-browse {
+    background-color: white;
+    color: #392465;
+    transition: all 0.3s ease;
+}
+
+.users-browse:hover {
+    background-color: #392465;
+    color: white;
+    border-radius: inherit;
+}
+
+.users-browse:hover i {
+    color: white;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+
+/* h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #392465;
+
+
+    .card-title h5{
+padding-bottom: 30px;
+
+}
+
+
+h5
+ {
+    color: #392465;
+ }
+
+
+} */
