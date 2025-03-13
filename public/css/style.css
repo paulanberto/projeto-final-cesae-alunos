@@ -6,6 +6,7 @@
     padding: 6px;
     text-align: center;
     font-size: 16px;
+    font-family: 'ChakraPetch-Light', sans-serif;
 }
 
 @font-face {
@@ -30,4 +31,53 @@
     color: #392465;
     font-weight: 650;
     font-family: 'ChakraPetch-SemiBold', sans-serif;
+}
+
+.fonteLink{
+    color: #059AE1;
+    font-weight: 650;
+    font-family: 'ChakraPetch-Light', sans-serif;
+}
+
+.botaoLogin{
+    background-color: #392465;
+    color: white;
+    border: none;
+    padding: 6px;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+    max-width: 300px;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.imagem-background {
+    background-color: #F6F6F6;
+    background-image: url('/imagens/cesae_logo.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-right: 0;
+    margin-right: 0;
+}
+
+.h2-registo{
+    margin-top: 20px; /* Ajuste o valor conforme necessário */
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.botaoCancel{
+    background-color: white;
+    color: #392465;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'ChakraPetch-Light', sans-serif;
 }
