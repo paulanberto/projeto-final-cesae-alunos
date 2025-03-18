@@ -19,6 +19,17 @@ class ForumController extends Controller
     }
 
     /**
+     * Show list of posts within a category
+     */
+    public function list(string $id) {
+
+        // acessar posts da categoria pelo id
+        $categoria;
+
+        return view('forum.forum_list', compact('categoria'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -39,7 +50,10 @@ class ForumController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //acessar dados do post pelo id
+        $post;
+
+        return view('forum.forum_post', compact('post'));
     }
 
     /**
