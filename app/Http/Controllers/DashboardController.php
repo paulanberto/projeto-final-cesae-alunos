@@ -19,16 +19,11 @@ class DashboardController extends Controller
 
         //     $courseInfo = $user->course()-first();
         // }
-        
+
         //return view('dashboard', compact('name', 'saldo_pontos', 'user_type', 'curso_id' ));
         return view('dashboard');
 
-
-
-
-
     }
-
 
 
 }

@@ -54,7 +54,7 @@
             {{-- @auth
                 @if (Auth::user()->user_type === 2) --}}
                     <div class="card mb-12">
-                        <a class=" users-browse" href="">
+                        <a class="users-browse" href="">
                             <div class="row g-0 dashboard-card-area">
                                 <div class="col-md-3 dashboard-img-and-button ">
                                     <i class="fa-solid fa-users"></i>
@@ -79,14 +79,14 @@
              {{-- @auth
                 @if (Auth::user()->user_type === 0) --}}
                 <div class="card mb-12">
-                    <a class=" users-browse" href="">
+                    <a class="delete-own-account" href="">
                         <div class="row g-0 dashboard-card-area">
                             <div class="col-md-3 dashboard-img-and-button ">
                                 <i class="fa-solid fa-trash"></i>
                             </div>
                             <div class="col-md-9">
                                 <div class="card-body">
-                                    <h5 class="card-title">Apagar conta.</h5>
+                                    <h5 class="card-title">Apagar Conta</h5>
                                     <p class="card-text">Aqui pode apagar a sua conta do nosso sistema.
                                     </p>
                                 </div>
