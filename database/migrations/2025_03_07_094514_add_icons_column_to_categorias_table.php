@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('categorias', function (Blueprint $table) {
-            $table->text('icons')
-            ->default("");
+           $table->string('icons')->default('');
         });
     }
 

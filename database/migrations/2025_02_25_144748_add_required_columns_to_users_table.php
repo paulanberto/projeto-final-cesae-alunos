@@ -26,7 +26,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn([
-                'saldo_pontos','user_type'
+                'saldo_pontos',
+                'user_type'
             ]);
         });
     }

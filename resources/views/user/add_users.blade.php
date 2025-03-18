@@ -24,17 +24,13 @@
                             placeholder="Software Developer" required>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="firstName" class="fontePrincipal">Primeiro Nome</label>
-                            <input type="text" class="form-control" id="firstName" name="firstName"
-                                placeholder="Primeiro Nome" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="lastName" class="fontePrincipal">Apelido</label>
-                            <input type="text" class="form-control" id="lastName" name="lastName"
-                                placeholder="Apelido" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="firstName" class="fontePrincipal">Nome Completo</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Seu Nome"
+                            required>
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
 
@@ -42,28 +38,39 @@
                         <label for="email" class="fontePrincipal">Email</label>
                         <input type="email" class="form-control" id="email" name="email"
                             placeholder="email@cesae.pt" required>
+                        @error('email')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="email" class="fontePrincipal">Confirme seu Email</label>
-                        <input type="email" class="form-control" id="email" name="email"
+                        <input type="email" class="form-control" id="email_confirmation" name="email_confirmation"
                             placeholder="email@cesae.pt" required>
+                        @error('email_confirmation')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
 
                     <div class="form-group">
                         <label for="password" class="fontePrincipal">Senha</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="senha"
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Senha"
                             required>
-                        <small class="form-text text-muted">A senha deve ser uma combinação de no mínimo
-                            8 letras, números e símbolos.</small>
+                        <small class="form-text text-muted">A senha deve ser uma combinação de no mínimo 8 letras,
+                            números e símbolos.</small>
+                        @error('password')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="password" class="fontePrincipal">Confirme sua Senha</label>
-                        <input type="password_confirmation" class="form-control" id="password_confirmation"
-                            name="password_confirmation" placeholder="confirme sua senha" required>
-
+                        <label for="password_confirmation" class="fontePrincipal">Confirme sua Senha</label>
+                        <input type="password" class="form-control" id="password_confirmation"
+                            name="password_confirmation" placeholder="Confirme sua senha" required>
+                        @error('password_confirmation')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-check mb-3">
@@ -72,6 +79,9 @@
                             acesso a comunidade bem como o tratamento de dados pessoais e sua política de privacidade.
                             <a href="{{ route('home') }}" class="fonteLink">Acesso a política de privacidade e regras da
                                 comunidade</a></label>
+                        @error('termos')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <button class="botaoLogin rounded-pill px-3 fontePrincipal" type="button">Registar</button>
