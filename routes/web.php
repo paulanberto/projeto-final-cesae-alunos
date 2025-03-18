@@ -53,8 +53,11 @@ Route::get('/addmaterial', [MaterialController::class, 'addMaterial'])->name('ma
 //rota para colocar os materiais que criamos no formulário na base de dados
 Route::post('/create-material', [MaterialController::class,'createMaterial'])->name('material.create');
 
-//rota para deletar materiais
-Route::get('/delete-material/{id}', [MaterialController::class,'deleteMaterial'])->name('material.delete');
+// Rota para excluir um material
+Route::delete('/material/delete/{id}', [MaterialController::class, 'deleteMaterial'])->name('material.delete');
+
+// Rota para excluir mais de um material ao mesmo tempo
+Route::delete('/material/delete-multiple', [MaterialController::class, 'deleteMaterial'])->name('material.deleteMultiple');
 //  });
 
 

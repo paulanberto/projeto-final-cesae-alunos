@@ -1,6 +1,30 @@
+nav {
+    background: linear-gradient(to left, #40155e, #530d6e,#a985ba);
+    color: white;
+    padding: 10px 0;
+}
+
+nav .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+nav .nav-link:hover {
+    color: white !important;
+}
+
+nav .link-body-emphasis,
+nav .link-secondary {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+nav .link-body-emphasis:hover,
+nav .link-secondary:hover {
+    color: white !important;
+}
+
 
 .botaoPrincipal{
-    background-color: #392465;
+    background-color: #7426aa;
     color: white;
     border: none;
     padding: 6px;
@@ -40,10 +64,10 @@
 }
 
 .botaoLogin{
-    background-color: #392465;
-    color: white;
+    background-color: #7426aa;
     border: none;
     padding: 6px;
+    color: white;
     text-align: center;
     font-size: 16px;
     width: 100%;
@@ -67,11 +91,7 @@
     margin-top: 20px; /* Ajuste o valor conforme necessário */
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
+
 
 .botaoCancel{
     background-color: white;
