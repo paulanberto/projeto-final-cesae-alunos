@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 
 class UserController extends Controller
@@ -19,23 +21,31 @@ class UserController extends Controller
 
     public function createUser(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|min:3',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8'
+
+        // Validar os dados de entrada
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email|regex:/@cesae\.pt$/', // Validando o domínio do email
+            'password' => 'required|string|confirmed|min:8', // Confirmar senha e garantir que tenha pelo menos 8 caracteres
+            'termos' => 'required|accepted', // Garantir que os termos foram aceitos
         ]);
 
-        User::insert(
-            [
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-            ]
-        );
+        // Criar o novo usuário
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-        return redirect()->route('login')->with('message', 'User adicionado com sucesso');
+        // Redirecionar para a página de login com uma mensagem de sucesso
+        return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso. Por favor, faça login.');
     }
+
+
 
 
 
@@ -45,6 +55,8 @@ class UserController extends Controller
 
         return view('users.view_user', compact('user'));
     }
+
+
 
     public function deleteUserFromDB($id)
     {
