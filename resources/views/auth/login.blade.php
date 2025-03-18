@@ -11,6 +11,11 @@
 
 <body>
     <div class="container-fluid h-100">
+        @if (session('success'))
+            <div class="alert alert-success mt-4">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="row h-100">
             <div class="col-md-6 p-5">
                 <h2 class="mb-3 p-5 mt-5 fonteBold fs-1">Login</h2>
@@ -35,10 +40,10 @@
                                 senha?</a>
                         </div>
                     </div>
-                    <button class="botaoLogin rounded-pill px-3 fontePrincipal" type="button">Entrar</button>
+                    <button class="botaoLogin rounded-pill px-3 fontePrincipal" type="submit">Entrar</button>
                 </form>
                 <p class="mt-4 text-center fontePrincipal">Não possui registo?
-                    <a href="{{ route('users.create') }}" class="fonteLink">Registe-se aqui</a>
+                    <a href="{{ route('users.add') }}" class="fonteLink">Registe-se aqui</a>
                 </p>
             </div>
             <div class="col-md-6 imagem-background">

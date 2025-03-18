@@ -2,16 +2,17 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Laravel\Fortify\Fortify;
+use Illuminate\Support\Facades\Auth;
 use App\Actions\Fortify\CreateNewUser;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Cache\RateLimiting\Limit;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
-use App\Actions\Fortify\UpdateUserProfileInformation;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
-use Laravel\Fortify\Fortify;
+use App\Actions\Fortify\UpdateUserProfileInformation;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -53,6 +54,17 @@ class FortifyServiceProvider extends ServiceProvider
 
         Fortify::resetPasswordView(function () {
             return view('auth.new_pass');
+        });
+
+        Fortify::authenticateUsing(function (Request $request) {
+            $credentials = $request->only(Fortify::username(), 'password');
+
+            // Verifica se o email termina com @cesae.pt
+            if (!Str::endsWith($credentials['email'], '@cesae.pt')) {
+                return null; // Falha na autenticação
+            }
+
+            return Auth::attempt($credentials) ? Auth::user() : null;
         });
     }
 }
