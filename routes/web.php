@@ -61,13 +61,19 @@ Route::delete('/material/delete-multiple', [MaterialController::class, 'deleteMa
 //  });
 
 
-Route::prefix('forum')->group(function() {
+Route::middleware('auth')->group(function() {
 
-    Route::get('/', [ForumController::class, 'index'])->name('forum.index');
+    Route::prefix('forum')->group(function() {
 
-    /* Route::get('/{id}') */
+        Route::get('/', [ForumController::class, 'index'])->name('forum.index');
 
+        Route::get('/list/{id}', ForumController::class, 'list')->name('forum.list');
+
+        Route::get('/post/{id}', ForumController::class, 'show')->name('forum.show');
+
+    });
 });
+
 
 
 Route::get('/dashboard', action: [DashboardController::class, 'getDashboard'])->name('dashboard.view');
