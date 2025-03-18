@@ -28,11 +28,6 @@
                     <li><a href="{{ route('forum.index') }}"class="nav-link px-2 link-body-emphasis">Fórum</a></li>
 
                 </ul>
-
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                    <input type="search" class="form-control" placeholder="Pesquisar..." aria-label="Search">
-                </form>
-
                 <div class="dropdown text-end">
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                         data-bs-toggle="dropdown" aria-expanded="false">
