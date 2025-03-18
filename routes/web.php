@@ -79,9 +79,9 @@ Route::middleware('auth')->group(function() {
 
         Route::get('/', [ForumController::class, 'index'])->name('forum.index');
 
-        Route::get('/list/{id}', ForumController::class, 'list')->name('forum.list');
+        Route::get('/list/{id}', [ForumController::class, 'list'])->name('forum.list');
 
-        Route::get('/post/{id}', ForumController::class, 'show')->name('forum.show');
+        Route::get('/post/{id}', [ForumController::class, 'show'])->name('forum.show');
 
     });
 
