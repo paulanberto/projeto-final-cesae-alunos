@@ -22,7 +22,7 @@
         @break
     @endswitch --}}
 
-
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <section class="dashboard-section">
         <div class="card mb-12">
             <div class="row g-0 dashboard-card-area">

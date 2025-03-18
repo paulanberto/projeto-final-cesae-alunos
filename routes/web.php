@@ -53,17 +53,27 @@ Route::get('/addmaterial', [MaterialController::class, 'addMaterial'])->name('ma
 //rota para colocar os materiais que criamos no formulário na base de dados
 Route::post('/create-material', [MaterialController::class, 'createMaterial'])->name('material.create');
 
-//rota para deletar materiais
-Route::get('/delete-material/{id}', [MaterialController::class, 'deleteMaterial'])->name('material.delete');
+// Rota para excluir um material
+Route::delete('/material/delete/{id}', [MaterialController::class, 'deleteMaterial'])->name('material.delete');
+
+// Rota para excluir mais de um material ao mesmo tempo
+Route::delete('/material/delete-multiple', [MaterialController::class, 'deleteMaterial'])->name('material.deleteMultiple');
 //  });
 
 
-Route::prefix('forum')->group(function () {
+Route::middleware('auth')->group(function() {
 
-    Route::get('/', [ForumController::class, 'index'])->name('forum.index');
+    Route::prefix('forum')->group(function() {
 
-    /* Route::get('/{id}') */
+        Route::get('/', [ForumController::class, 'index'])->name('forum.index');
+
+        Route::get('/list/{id}', ForumController::class, 'list')->name('forum.list');
+
+        Route::get('/post/{id}', ForumController::class, 'show')->name('forum.show');
+
+    });
 });
+
 
 
 Route::get('/dashboard', action: [DashboardController::class, 'getDashboard'])->name('dashboard.view');
