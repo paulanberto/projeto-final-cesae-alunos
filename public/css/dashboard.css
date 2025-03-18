@@ -8,9 +8,7 @@
 
 .dashboard-card-area {
     width: 800px;
-
 }
-
 
 .dashboard-img-and-button {
     display: flex;
@@ -18,7 +16,6 @@
     justify-content: center;
     align-items: center;
 }
-
 
 .img-profile-dashboard {
     height: 120px;
@@ -53,7 +50,7 @@ i {
     font-size: 64px;
     padding: 24px 0;
     color: #392465;
-    transition: color 0.3s ease;    
+    transition: color 0.3s ease;
 }
 
 .card {
@@ -82,6 +79,10 @@ a {
 }
 
 
+.fa-users, .fa-trash {
+    font-size: 48px;
+}
+
 /* h1,
 h2,
 h3,
@@ -89,8 +90,6 @@ h4,
 h5,
 h6 {
     color: #392465;
-
-
     .card-title h5{
 padding-bottom: 30px;
 
