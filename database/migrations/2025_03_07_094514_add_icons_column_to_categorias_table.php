@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('categorias', function (Blueprint $table) {
            $table->string('icons')->default('');
+           $table->boolean('exclusivoForum')->default(false);
         });
     }
 
@@ -23,6 +24,7 @@ return new class extends Migration
     {
         Schema::table('categorias', function (Blueprint $table) {
             $table->dropColumn('icons');
+            $table->dropColumn('exclusivoForum');
         });
     }
 };
