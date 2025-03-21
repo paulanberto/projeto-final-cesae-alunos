@@ -20,4 +20,8 @@ class Post extends Model
         'ficheiro',
     ];
 
+    public function tags() {
+        return $this->belongsToMany(Tag::class);
+    }
+
 }
