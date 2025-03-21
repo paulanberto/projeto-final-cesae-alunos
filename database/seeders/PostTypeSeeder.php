@@ -19,7 +19,8 @@ class PostTypeSeeder extends Seeder
         insert([
             ['id' => '1', 'nome' => 'Material'],
             ['id' => '2', 'nome' => 'Pergunta'],
-            ['id' => '3', 'nome' => 'Genérico']
+            ['id' => '3', 'nome' => 'Genérico'],
+            ['id' => '4', 'nome' => 'Comentário'],
         ]);
     }
 }

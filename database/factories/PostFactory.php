@@ -21,8 +21,8 @@ class PostFactory extends Factory
             'user_id' => User::factory(),
             'categoria_id' => random_int(1,9),
             'post_type_id' => random_int(1,3),
-            'titulo' => fake()->title(),
-            'texto' => fake()->paragraph()
+            'titulo' => fake()->sentence(5),
+            'texto' => fake()->paragraph(40)
         ];
     }
 }

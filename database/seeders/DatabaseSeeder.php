@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             PostTypeSeeder::class,
         ]);
 
-        Post::factory(50)->create();
+        Post::factory(100)->create();
 
         foreach( Post::all() as $post ) {
             $tags = Tag::inRandomOrder()->take(rand(1,5))->pluck('id');
