@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Tema extends Model
 {
     protected $table = 'categorias';
-    protected $fillable = ['name', 'descricao', 'icons'];
+    protected $fillable = ['nome', 'descricao', 'icons'];
 }

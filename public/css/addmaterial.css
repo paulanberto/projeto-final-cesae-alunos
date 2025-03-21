@@ -1,0 +1,10 @@
+.file-type-selector {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.file-type-selector.active {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+}

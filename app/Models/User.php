@@ -50,4 +50,9 @@ class User extends Authenticatable
         // Usando o user_type onde 2 identifica um admin
         return $this->user_type == 2;
     }
+
+    public function isModerador() {
+        // Usando o user_type onde 1 identifica um moderador
+        return $this->user_type == 1;
+    }
 }
