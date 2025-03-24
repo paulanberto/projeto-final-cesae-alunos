@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+
 
 
 class UserController extends Controller
@@ -75,7 +77,8 @@ class UserController extends Controller
         return view('user.view_users', compact('users'));
     }
 
-    // Combined view and edit user page
+
+
     public function viewUser($id)
     {
         $user = DB::table('users')
@@ -88,32 +91,23 @@ class UserController extends Controller
             return redirect()->route('users.view')->with('error', 'User not found.');
         }
 
-        // Get all courses for edit mode
-        $cursos = DB::table('cursos')->get();
-
-        // Check if we should show edit mode
-        $editMode = request()->has('edit');
-
-        return view('user.user_details', compact('user', 'cursos', 'editMode'));
+        return view('user.view_user', compact('user'));
     }
 
-//backup
 
-    // public function viewUser($id)
-    // {
-    //     $user = DB::table('users')
-    //         ->leftJoin('cursos', 'users.curso_id', '=', 'cursos.id')
-    //         ->select('users.*', 'cursos.nome as curso_nome')
-    //         ->where('users.id', $id)
-    //         ->first();
 
-    //     if (!$user) {
-    //         return redirect()->route('users.view')->with('error', 'User not found.');
-    //     }
 
-    //     return view('user.view_user', compact('user'));
-    // }
+    public function editUser($id)
+    {
+        $user = DB::table('users')->where('id', $id)->first();
+        $cursos = DB::table('cursos')->get();
 
+        if (!$user) {
+            return redirect()->route('users.view')->with('error', 'User not found.');
+        }
+
+        return view('user.edit_user', compact('user', 'cursos'));
+    }
 
 
 
@@ -121,13 +115,10 @@ class UserController extends Controller
     {
 
         DB::table('users')->where('id', $id)->delete();
-        return redirect()->route('users.view')->with('success', 'User deleted successfully.');
+        return redirect()->route('users.view')->with('success', 'Perfil apagado com sucesso.');
         // db::table('users')->where('id', $id)->delete();
         // return back();
     }
-
-
-
 
     public function updateUser(Request $request, $id)
     {
@@ -149,7 +140,7 @@ class UserController extends Controller
 
         DB::table('users')->where('id', $id)->update($userData);
 
-        return redirect()->route('users.view')->with('success', 'User updated successfully.');
+        return redirect()->route('users.view.single', $id)->with('success', 'User updated successfully.');
     }
 
 

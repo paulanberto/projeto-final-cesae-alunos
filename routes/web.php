@@ -3,7 +3,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TemaController;
 use App\Http\Controllers\ForumController;
@@ -18,7 +17,7 @@ Route::get('/', function () {
 
 // Rota de fallback
 Route::fallback(function () {
-    return view('falback');
+    return view('fallback');
 });
 
 
@@ -33,13 +32,20 @@ Route::post('/create-user', [UserController::class, 'createUser'])->name('users.
 
 
 Route::middleware('auth')->group(function() {
-    // User related, created for dashboard and user management
+
+    //todos os users (tabela)
     Route::get('/view-users', [UserController::class, 'viewUsers'])->name('users.view');
+
+    // um só user (editar perfil)
     Route::get('/user/{id}', [UserController::class, 'viewUser'])->name('users.view.single');
     Route::get('/user/{id}/edit', [UserController::class, 'editUser'])->name('users.edit');
     Route::post('/user/{id}/update', [UserController::class, 'updateUser'])->name('users.update');
     Route::get('/user/{id}/delete', [UserController::class, 'deleteUserFromDB'])->name('users.delete');
 });
+
+
+
+
 
 
 
