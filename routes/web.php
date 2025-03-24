@@ -31,35 +31,19 @@ Route::get('/users', [UserController::class, 'listUsers'])->name('users.list');
 Route::get('/add-users', [UserController::class, 'addUsers'])->name('users.add');
 Route::post('/create-user', [UserController::class, 'createUser'])->name('users.create');
 
-
-
-
-
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
 
     //todos os users (tabela)
     Route::get('/view-users', [UserController::class, 'viewUsers'])->name('users.view');
 
     // um só user (editar perfil)
     Route::get('/user/{id}', [UserController::class, 'viewUser'])->name('users.view.single');
+
     Route::get('/user/{id}/edit', [UserController::class, 'editUser'])->name('users.edit');
+
     Route::post('/user/{id}/update', [UserController::class, 'updateUser'])->name('users.update');
+
     Route::get('/user/{id}/delete', [UserController::class, 'deleteUserFromDB'])->name('users.delete');
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', action: [DashboardController::class, 'getDashboard'])->name('dashboard.view');
 
@@ -113,21 +97,16 @@ Route::middleware('auth')->group(function () {
     });
 
 
-
-
     Route::prefix('forum')->group(function () {
 
         Route::get('/', [ForumController::class, 'index'])->name('forum.index');
 
-        Route::get('/list/{id}', [[ForumController::class, 'list']])->name('forum.list');
+        Route::get('/list/{id}', [ForumController::class, 'list'])->name('forum.list');
 
-        Route::get('/post/{id}', [[ForumController::class, 'show']])->name('forum.show');
+        Route::get('/post/{id}', [ForumController::class, 'show'])->name('forum.show');
+
         Route::post('/comment', [ForumController::class, 'comment'])->name('forum.comment');
 
     });
-
-
-
-
 
 });

@@ -14,7 +14,7 @@
                 <div class="col-md-9">
                     <div class="card-body">
                         <h5 class="card-title">
-                           {{-- @switch(Auth::user()->user_type)
+                            @switch(Auth::user()->user_type)
                                 @case(0)
                                     Aluno
                                 @break
