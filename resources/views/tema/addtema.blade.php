@@ -24,19 +24,19 @@
 
                 <div class="mb-3">
                     <label for="sectionTitle" class="fontePrincipal">Título do Tema</label>
-                    <input type="text" class="form-control" id="sectionTitle" name="title"
+                    <input type="text" class="form-control" id="sectionTitle" name="nome"
                         placeholder="Insira o Título...">
                 </div>
 
                 <div class="mb-4">
                     <label for="sectionDescription" class="fontePrincipal">Descrição do Tema</label>
-                    <textarea class="form-control" id="sectionDescription" name="description" rows="3"
+                    <textarea class="form-control" id="sectionDescription" name="descricao" rows="3"
                         placeholder="Adicione a descrição aqui..."></textarea>
                 </div>
 
                 <div class="d-flex justify-content-end gap-2">
                     <a href="{{ route('tema') }}"><button type="button" class="botaoCancel" data-bs-dismiss="modal">Cancel</button></a>
-                    <a href="{{ route('tema') }}"><button class="botaoPrincipal rounded-pill px-3" type="submit">Enviar</button></a>
+                    <button class="botaoPrincipal rounded-pill px-3" type="submit">Enviar</button>
                 </div>
             </form>
         </div>
