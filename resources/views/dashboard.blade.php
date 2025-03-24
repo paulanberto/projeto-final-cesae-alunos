@@ -13,8 +13,8 @@
                 </div>
                 <div class="col-md-9">
                     <div class="card-body">
-                        <h2 class="card-title">
-                            @switch(Auth::user()->user_type)
+                        <h5 class="card-title">
+                           {{-- @switch(Auth::user()->user_type)
                                 @case(0)
                                     Aluno
                                 @break
@@ -64,7 +64,7 @@
                 </div>
             @endif
 
-            <div class="empty-space"></div>
+        <div class="empty-space"></div>
 
             @auth
                 @if (Auth::user()->user_type === 0)

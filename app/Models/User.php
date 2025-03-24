@@ -3,9 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Curso;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -15,18 +16,19 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
         'email',
         'password',
+        'curso_id',
     ];
 
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -46,8 +48,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function isAdmin() {
+    public function isAdmin()
+    {
         // Usando o user_type onde 2 identifica um admin
         return $this->user_type == 2;
+    }
+
+    public function curso() {
+        return $this->belongsTo(Curso::class);
+    }
+      
+    public function isModerador() {
+        // Usando o user_type onde 1 identifica um moderador
+        return $this->user_type == 1;
     }
 }

@@ -22,46 +22,51 @@ class TemaController extends Controller
     }
 
     public function addTema(){
-        // if (!auth()->user()->isAdmin()) {
-        //     return redirect()->route('tema')->with('error', 'Apenas administradores podem acessar esta página.');
-        // }
         return view('tema.addtema');
     }
 
     public function createTema(Request $request){
 
-        // if (!auth()->user()->isAdmin()) {
-        //     return redirect()->back()->with('error', 'Apenas administradores podem criar temas.');
-        // }
 
         $request->validate([
-        'nome' => 'required|string|max:255',
-        'descricao' => 'required|string|max:255',
-        'icons' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-    ]);
+            'nome' => 'required|string|max:255',
+            'descricao' => 'required|string|max:255',
+            'icons' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
 
-    $iconPath = $request->file('icons')->store('temaIcons', 'public');
+        $iconPath = $request->file('icons')->store('temaIcons', 'public');
 
-    Tema::create([
-        'nome' => $request->nome,
-        'descricao' => $request->descricao,
-        'icons' => $iconPath
 
-    ]);
+        DB::table('categorias')->insert([
+            'nome' => $request->nome,
+            'descricao' => $request->descricao,
+            'icons' => $iconPath,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
 
         return redirect()->route('tema')->with('message', 'Tema adicionado com sucesso');
     }
 
-    public function deleteTema($id){
+    public function deleteTema(Request $request){
 
-        // if (!auth()->user()->isAdmin()) {
-        //     return redirect()->back()->with('error', 'Apenas administradores podem deletar temas.');
-        // }
-        DB::table('categorias')
-        -> where ('id', $id)
-        -> delete ();
 
-        return back();
+        if($request->has('temas')) {
+            foreach($request->temas as $id) {
+                DB::table('categorias')
+                    ->where('id', $id)
+                    ->delete();
+            }
+
+            return redirect()->route('tema')->with('success', 'Temas excluídos com sucesso');
+        }
+
+        else if($request->has('id')) {
+            DB::table('categorias')
+                ->where('id', $request->id)
+                ->delete();
+            return redirect()->route('material')->with('success', 'Tema excluído com sucesso');
+        }
     }
 
 }

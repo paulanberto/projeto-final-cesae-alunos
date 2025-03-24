@@ -16,11 +16,17 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->delete();
 
-        DB::table('users')->insert([
-            'name' => 'admin',
-            'email' => 'admin@cesae.pt',
-            'password' => Hash::make('admin@email.com'),
+        DB::table('users')->insert([[
+            'name' => 'Bruno Santos',
+            'email' => 'admin@msft.cesae.pt',
+            'password' => Hash::make('admin@msft.cesae.pt'),
             'user_type' => '2',
-        ]);
+        ],
+        [
+            'name' => 'Sara Monteiro',
+            'email' => 'moderador@msft.cesae.pt',
+            'password' => Hash::make('moderador@msft.cesae.pt'),
+            'user_type' => '1',
+        ]]);
     }
 }

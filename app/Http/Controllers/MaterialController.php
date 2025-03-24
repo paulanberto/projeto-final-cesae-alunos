@@ -13,63 +13,117 @@ class MaterialController extends Controller
         return view('material.material', compact('material'));
     }
 
+    public function showMaterial(string $id){
+        $categoria = DB::table('categorias')
+        ->where('id', $id)
+        ->first();
+
+
+        $material = DB::table('posts')
+        ->join('users', 'posts.user_id', '=', 'users.id')
+        ->join('categorias', 'posts.categoria_id', '=', 'categorias.id')
+        ->where('posts.categoria_id', $id)
+        ->select('posts.*', 'users.name as user_name')
+        ->get();
+
+        return view('material.material', compact('categoria', 'material'));
+    }
+
+    public function showDetalhes(string $id)
+    {
+
+        $material = DB::table('posts')
+            ->join('users', 'posts.user_id', '=', 'users.id')
+            ->join('categorias', 'posts.categoria_id', '=', 'categorias.id')
+            ->select(
+                'posts.*',
+                'users.name as user_name',
+                'categorias.nome as categoria_nome',
+                'ficheiro'
+
+            )
+            ->where('posts.id', $id)
+            ->first();
+
+        if (!$material) {
+            return redirect()->route('material')->with('error', 'Material não encontrado');
+        }
+
+        return view('material.detalhesmaterial', compact('material'));
+    }
 
     public function getAllMaterialFromDB(){
-        $tema = DB::table('posts')
-        ->get();
-     return $tema;
+        $material = DB::table('posts')
+            ->join('users', 'posts.user_id', '=', 'users.id')
+            ->join('categorias', 'posts.categoria_id', '=', 'categorias.id')
+            ->select('posts.*', 'users.name as user_name', 'categorias.nome as categoria_nome')
+            ->get();
+        return $material;
     }
 
-     public function addMaterial(){
-    //     // if (!auth()->user()->isAdmin()) {
-    //     //     return redirect()->route('tema')->with('error', 'Apenas administradores podem acessar esta página.');
-    //     // }
-        return view('material.addmaterial');
+    public function addMaterial(Request $request){
+
+        $categoriaId = $request->categoria_id;
+
+
+        $categoria = DB::table('categorias')->where('id', $categoriaId)->first();
+
+        return view('material.addmaterial', compact('categoria', 'categoriaId'));
     }
 
-    // public function createMaterial(Request $request){
+    public function createMaterial(Request $request){
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'texto' => 'required|string|max:255',
+            'ficheiro' => 'required|file|max:5120',
+            'categoria_id' => 'required|exists:categorias,id'
+        ]);
 
-    //     // if (!auth()->user()->isAdmin()) {
-    //     //     return redirect()->back()->with('error', 'Apenas administradores podem criar temas.');
-    //     // }
 
-    //     $request->validate([
-    //     'nome' => 'required|string|max:255',
-    //     'descricao' => 'required|string|max:255',
-    //     'icons' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-    // ]);
+        $ficheiro = $request->file('ficheiro')->store('materialFicheiro', 'public');
 
-    // $iconPath = $request->file('icons')->store('temaIcons', 'public');
 
-    // Tema::create([
-    //     'nome' => $request->nome,
-    //     'descricao' => $request->descricao,
-    //     'icons' => $iconPath
+        $postTypeId = 1;
 
-    // ]);
+        try {
 
-    //     return redirect()->route('tema')->with('message', 'Tema adicionado com sucesso');
-    // }
+            $id = DB::table('posts')->insertGetId([
+                'post_type_id' => $postTypeId,
+                'user_id' => auth()->user()->id,
+                'categoria_id' => $request->categoria_id,
+                'titulo' => $request->titulo,
+                'texto' => $request->texto,
+                'ficheiro' => $ficheiro,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
 
-    public function deleteMaterial(Request $request)
-    {
-        // Se receber um array de IDs (exclusão múltipla)
-        if($request->has('materials')) {
-            foreach($request->materials as $id) {
+            return redirect()->route('material.show', ['id' => $request->categoria_id])
+                ->with('message', 'Material adicionado com sucesso (ID: ' . $id . ')');
+        } catch (\Exception $e) {
+
+            return back()->with('error', 'Erro ao adicionar material: ' . $e->getMessage());
+        }
+    }
+
+    public function deleteMaterial(Request $request){
+       
+
+        if($request->has('materiais')) {
+            foreach($request->materiais as $id) {
                 DB::table('posts')
                     ->where('id', $id)
                     ->delete();
             }
-            return back()->with('success', 'Materiais excluídos com sucesso');
+
+            return redirect()->route('material')->with('success', 'Materiais excluídos com sucesso');
         }
-        // Se receber um único ID (exclusão individual)
-        else if($request->id) {
+
+        else if($request->has('id')) {
             DB::table('posts')
                 ->where('id', $request->id)
                 ->delete();
-            return back();
+            return redirect()->route('material')->with('success', 'Material excluído com sucesso');
         }
-
-        return back()->with('error', 'Nenhum item selecionado');
     }
 }

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 
 class ForumController extends Controller
 {
@@ -23,10 +26,21 @@ class ForumController extends Controller
      */
     public function list(string $id) {
 
+        $categoria = DB::table('categorias')
+        ->select('nome')
+        ->where('id', $id)
+        ->first();
         // acessar posts da categoria pelo id
-        $categoria;
+        $posts = Post::where('categoria_id', $id)
+        ->where(function (Builder $query) {
+            $query->where('post_type_id', '2')
+                ->orWhere('post_type_id', '3');
+        })
+        ->orderBy('created_at', 'desc')
+        ->get();
 
-        return view('forum.forum_list', compact('categoria'));
+
+        return view('forum.forum_list', compact('posts', 'categoria'));
     }
 
     /**
@@ -46,14 +60,38 @@ class ForumController extends Controller
     }
 
     /**
+     * Store a newly created comment in storage.
+     */
+    public function comment(Request $request)
+    {
+        $request->validate([
+            'texto' => 'required|string',
+            'parent_id' => 'required|exists:posts,id',
+            'categoria_id' => 'required | exists:categorias,id'
+        ]);
+
+
+        Post::create([
+            'user_id' => Auth::id(),
+            'categoria_id' => $request->categoria_id,
+            'post_type_id' => 4,
+            'texto' => $request->texto,
+            'parent_id' => $request->parent_id
+        ]);
+
+        return redirect()->back();
+    }
+
+    /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
         //acessar dados do post pelo id
-        $post;
+        $post = Post::where('id', $id)->first();
+        $comentarios = Post::where('parent_id', $id)->get();
 
-        return view('forum.forum_post', compact('post'));
+        return view('forum.forum_post', compact('post', 'comentarios'));
     }
 
     /**
