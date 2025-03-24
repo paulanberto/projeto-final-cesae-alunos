@@ -1,0 +1,120 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container-fluid {
+  flex: 1;
+  min-height: 100vh;
+  padding: 0;
+}
+
+.row {
+  min-height: 100vh;
+  margin: 0;
+}
+
+.col-md-6 {
+  min-height: 100vh;
+}
+
+.imagem-background {
+  background-color: #F6F6F6;
+  background-image: url('/imagens/cesae_logo.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.botaoLogin{
+  background-color: #7426aa;
+  border: none;
+  padding: 6px;
+  color: white !important;
+  text-align: center;
+  font-size: 16px;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.fonteBold{
+  color: #392465;
+  font-weight: 650;
+  font-family: 'ChakraPetch-SemiBold', sans-serif;
+}
+
+.fonteLink{
+  color: #059AE1;
+  font-weight: 650;
+  font-family: 'ChakraPetch-Light', sans-serif;
+}
+
+@font-face {
+  font-family: 'ChakraPetch-Light';
+  src: url("../fontes/ChakraPetch-Light.ttf") format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'ChakraPetch-SemiBold';
+  src: url("../fontes/ChakraPetch-SemiBold.ttf") format('truetype');
+  font-weight: normal;
+}
+
+.fontePrincipal{
+  color: #392465;
+  font-weight: 650;
+  font-family: 'ChakraPetch-Light', sans-serif;
+}
+
+/* Alertas */
+.alert {
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+/* Layout responsivo */
+@media (max-width: 768px) {
+  .imagem-background {
+      display: none;
+  }
+  
+  .col-md-6.p-5 {
+      padding: 20px !important;
+  }
+  
+  form.p-5 {
+      padding: 15px !important;
+  }
+  
+  h2.p-5 {
+      padding: 15px !important;
+  }
+}
+
