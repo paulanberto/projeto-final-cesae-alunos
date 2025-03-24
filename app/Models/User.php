@@ -48,11 +48,6 @@ class User extends Authenticatable
         ];
     }
 
-    public function curso()
-    {
-        return $this->belongsTo(Curso::class);
-    }
-
     public function isAdmin()
     {
         // Usando o user_type onde 2 identifica um admin
