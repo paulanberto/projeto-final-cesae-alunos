@@ -48,23 +48,30 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.login');
         });
 
+
+
+        // Registra a view de solicitação de redefinição
         Fortify::requestPasswordResetLinkView(function () {
-            return view(('auth.reset_pass'));
+            return view('auth.forgot_password');
         });
 
-        Fortify::resetPasswordView(function () {
-            return view('auth.new_pass');
+        // Define a view para o formulário de reset de senha (após clicar no link do email)
+        Fortify::resetPasswordView(function ($request) {
+            return view('auth.new_pass', [
+                'token' => $request->route('token'),
+                'email' => $request->email
+            ]);
         });
 
+        // Configuração de autenticação
         Fortify::authenticateUsing(function (Request $request) {
-            $credentials = $request->only(Fortify::username(), 'password');
+            $credentials = $request->only('email', 'password');
 
-            // Verifica se o email termina com @cesae.pt
-            if (!Str::endsWith($credentials['email'], '@cesae.pt')) {
-                return null; // Falha na autenticação
+            if (Auth::attempt($credentials)) {
+                return Auth::user();
             }
 
-            return Auth::attempt($credentials) ? Auth::user() : null;
+            return null;
         });
     }
 }

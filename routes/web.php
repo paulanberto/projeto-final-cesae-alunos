@@ -25,20 +25,23 @@ Route::fallback(function () {
 Route::get('/design', [DesignController::class, 'index'])->name('design');
 
 // Rota users
+Route::get('/users', [UserController::class, 'listUsers'])->name('users.list');
 Route::get('/add-users', [UserController::class, 'addUsers'])->name('users.add');
 Route::post('/create-user', [UserController::class, 'createUser'])->name('users.create');
+Route::get('/edit-user/{id}', [UserController::class, 'editUser'])->name('users.edit');
+Route::post('/update-user/{id}', [UserController::class, 'updateUser'])->name('users.update');
+Route::get('/view-user/{id}', [UserController::class, 'viewUser'])->name('users.view');
+Route::delete('/delete-user/{id}', [UserController::class, 'deleteUserFromDB'])->name('users.delete');
 
 
 
 
 
-
-
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', action: [DashboardController::class, 'getDashboard'])->name('dashboard.view');
 
-    Route::prefix('tema')->group(function() {
+    Route::prefix('tema')->group(function () {
 
         Route::get('/', [TemaController::class, 'index'])->name('tema');
 
@@ -50,12 +53,11 @@ Route::middleware('auth')->group(function() {
 
         //rota para deletar temas
         Route::get('/delete/{id}', [TemaController::class, 'deleteTema'])->name('tema.delete');
-
     });
 
 
 
-    Route::prefix('material')->group(function() {
+    Route::prefix('material')->group(function () {
 
         Route::get('/', [MaterialController::class, 'index'])->name('material');
 
@@ -75,21 +77,14 @@ Route::middleware('auth')->group(function() {
 
 
 
-    Route::prefix('forum')->group(function() {
+    Route::prefix('forum')->group(function () {
 
         Route::get('/', [ForumController::class, 'index'])->name('forum.index');
 
         Route::get('/list/{id}', [ForumController::class, 'list'])->name('forum.list');
 
         Route::get('/post/{id}', [ForumController::class, 'show'])->name('forum.show');
-
         Route::post('/comment', [ForumController::class, 'comment'])->name('forum.comment');
 
     });
-
-
 });
-
-
-
-
