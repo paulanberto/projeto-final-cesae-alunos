@@ -103,5 +103,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/list/{id}', [ForumController::class, 'list'])->name('forum.list');
 
         Route::get('/post/{id}', [ForumController::class, 'show'])->name('forum.show');
+        Route::post('/comment', [ForumController::class, 'comment'])->name('forum.comment');
+
     });
 });

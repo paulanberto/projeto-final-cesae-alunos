@@ -18,7 +18,7 @@
                     <p class="fontePrincipal"> {{$categoria->descricao}} </p>
                 </div>
                 <div class="col-4" id="categoriaLink">
-                    <a class="fonteBold" href="#">Junte-se à conversa</a>
+                    <a class="fonteBold" href=" {{route('forum.list', $categoria->id)}} ">Junte-se à conversa</a>
                 </div>
             </div>
         </div>
