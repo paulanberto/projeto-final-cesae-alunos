@@ -69,6 +69,10 @@
                 <a href="{{ route('login') }}" class="fontePrincipal">Voltar para o login</a>
             </div>
         </div>
+
+        <h1>Olá</h1>
+
+        
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
