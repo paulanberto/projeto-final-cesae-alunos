@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const botaoSelecionar = document.getElementById('botaoSelecionar');
-    const checkboxes = document.querySelectorAll('.material-checkbox');
+    const checkboxes = document.querySelectorAll('.tema-checkbox');
     const botaoDeletar = document.getElementById('botaoDeletar');
     const deleteForm = document.getElementById('deleteForm');
     let selectMode = false;
@@ -19,17 +19,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         if (!selectMode) {
-            document.querySelectorAll('input[name="materiais[]"]').forEach(function(box) {
+            document.querySelectorAll('input[name="temas[]"]').forEach(function(box) {
                 box.checked = false;
             });
             botaoDeletar.style.display = 'none';
         }
     });
 
-    document.querySelectorAll('input[name="materiais[]"]').forEach(function(checkbox) {
+    document.querySelectorAll('input[name="temas[]"]').forEach(function(checkbox) {
         checkbox.addEventListener('change', function() {
             const anyChecked = Array.from(
-                document.querySelectorAll('input[name="materiais[]"]')
+                document.querySelectorAll('input[name="temas[]"]')
             ).some(box => box.checked);
 
             botaoDeletar.style.display = anyChecked ? 'block' : 'none';
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     botaoDeletar.querySelector('button').addEventListener('click', function(e) {
         e.preventDefault();
 
-        if (confirm('Tem certeza que deseja excluir os materiais selecionados?')) {
+        if (confirm('Tem certeza que deseja excluir os temas selecionados?')) {
             deleteForm.submit();
         }
     });

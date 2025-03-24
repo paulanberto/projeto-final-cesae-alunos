@@ -57,4 +57,9 @@ class User extends Authenticatable
     public function curso() {
         return $this->belongsTo(Curso::class);
     }
+      
+    public function isModerador() {
+        // Usando o user_type onde 1 identifica um moderador
+        return $this->user_type == 1;
+    }
 }
