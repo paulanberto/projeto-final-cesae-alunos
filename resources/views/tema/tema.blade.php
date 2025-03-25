@@ -1,4 +1,5 @@
 @extends('layouts.fo_layout')
+<link href="{{ asset('css/tema.css') }}" rel="stylesheet">
 <script src="{{ asset('js/tema.js') }}"></script>
 
 @section('full_width_content')
