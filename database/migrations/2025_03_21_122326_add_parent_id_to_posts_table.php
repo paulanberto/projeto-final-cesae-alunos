@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('categorias', function (Blueprint $table) {
-           $table->string('icons')->default('');
-           $table->boolean('exclusivoForum')->default(false);
+        Schema::table('posts', function (Blueprint $table) {
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('posts');
         });
     }
 
@@ -22,9 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('categorias', function (Blueprint $table) {
-            $table->dropColumn('icons');
-            $table->dropColumn('exclusivoForum');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropColumn('parent_id');
         });
     }
 };

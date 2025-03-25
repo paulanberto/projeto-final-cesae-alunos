@@ -1,3 +1,7 @@
+
+
+
+
 .dashboard-section {
     display: flex;
     flex-direction: column;
@@ -59,12 +63,25 @@ i {
 
 .users-browse {
     background-color: white;
-    color: #392465;
+    color: #7426aa;
     transition: all 0.3s ease;
 }
 
 .users-browse:hover {
-    background-color: #392465;
+    background-color: #7426aa;
+    color: white;
+    border-radius: inherit;
+}
+
+.delete-own-account {
+    background-color: white;
+    color: #868686;
+    transition: all 0.3s ease;
+
+}
+
+.delete-own-account:hover {
+    background-color: #dc3545;
     color: white;
     border-radius: inherit;
 }
@@ -83,23 +100,11 @@ a {
     font-size: 48px;
 }
 
-/* h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: #392465;
-    .card-title h5{
-padding-bottom: 30px;
-
+h2 {
+    color: #7426aa;
 }
-
 
 h5
  {
     color: #392465;
  }
-
-
-} */

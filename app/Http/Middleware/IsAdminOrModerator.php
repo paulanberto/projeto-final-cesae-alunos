@@ -15,7 +15,7 @@ class IsAdminOrModerator
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->check && (auth()->user()->isAdmin() || auth()->user()->isModerator())) {
+        if (auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isModerator())) {
             return $next($request);
         }
 

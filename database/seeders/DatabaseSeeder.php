@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Tag;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Post;
+use App\Models\User;
 use Database\Seeders\TagSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
@@ -33,6 +35,11 @@ class DatabaseSeeder extends Seeder
             PostTypeSeeder::class,
         ]);
 
-        User::factory(20)->create();
+        Post::factory(100)->create();
+
+        foreach( Post::all() as $post ) {
+            $tags = Tag::inRandomOrder()->take(rand(1,5))->pluck('id');
+            $post->tags()->attach($tags);
+        }
     }
 }
