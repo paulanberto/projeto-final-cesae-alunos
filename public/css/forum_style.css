@@ -20,6 +20,16 @@
     text-align: end;
 }
 
+.listCategoria{
+    margin: 15px;
+    margin-bottom: 6%;
+}
+
+.newPostCard:hover{
+    background-color: rgb(213, 210, 206);
+    transition: 0.3s;
+}
+
 .tableTag{
     background-color: rgba(183, 183, 183, 0.585);
     margin-right: 4px;
@@ -44,6 +54,26 @@
     font-size: smaller;
 }
 
+.secaoPost{
+    background-color: rgb(224, 218, 210);
+    padding: 5%;
+    border-radius: 15px;
+    box-shadow: 10px 10px 5px #9750ca;
+}
+
 .secaoComentarios{
     margin-top: 12%;
+}
+
+.comentario{
+    background-color: rgb(224, 218, 210);
+    padding: 5%;
+    border-radius: 15px;
+    box-shadow: 10px 10px 5px #9750ca;
+    margin-bottom: 5%;
+}
+
+.commentInput{
+    width: 90%;
+    margin-bottom: 5px;
 }
