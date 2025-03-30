@@ -20,7 +20,7 @@
     text-align: end;
 }
 
-.listCategoria{
+.forumTitle{
     margin: 15px;
     margin-bottom: 6%;
 }
@@ -76,4 +76,31 @@
 .commentInput{
     width: 90%;
     margin-bottom: 5px;
+}
+
+.createPostForm{
+    background-color: rgb(224, 218, 210);
+    padding: 5%;
+    border-radius: 15px;
+    box-shadow: 10px 10px 5px #9750ca;
+    margin-bottom: 5%;
+
+    label{
+        margin-bottom: 8px;
+    }
+
+    .tagCheckButton{
+        margin-bottom: 4px;
+        background-color: #ac8fc0;
+        border-radius: 2px;
+        border-color: #7426aa;
+    }
+
+    .tagCheckButton:hover{
+        background-color: #7426aa !important;
+        border-color: #570492 !important;
+    }
+    .tagCheckButton:active{
+        background-color: #7426aa !important;
+    }
 }

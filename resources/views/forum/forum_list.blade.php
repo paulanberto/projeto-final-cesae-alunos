@@ -10,7 +10,7 @@
 
 
     <div class="container">
-        <h1 class="fonteBold listCategoria"> {{$categoria->nome}} </h1>
+        <h1 class="fonteBold forumTitle"> {{$categoria->nome}} </h1>
 
         <a href="{{route('forum.create', $categoria->id)}}">
             <div class="card newPostCard mb-3">

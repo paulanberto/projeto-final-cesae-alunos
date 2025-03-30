@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -48,7 +49,8 @@ class ForumController extends Controller
      */
     public function create(string $id)
     {
-        return view('forum.forum_create', compact('id'));
+        $allTags = Tag::all();
+        return view('forum.forum_create', compact('id', 'allTags'));
     }
 
     /**
