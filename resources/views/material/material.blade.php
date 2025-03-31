@@ -3,6 +3,24 @@
     <link rel="stylesheet" href="{{ asset('css/material.css') }}">
     <script src="{{ asset('js/material.js') }}"></script>
 
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
+
+    @if (session('points_message'))
+        <div class="alert alert-info">
+            {{ session('points_message') }}
+        </div>
+    @endif
+
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="fonteBold mt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -18,9 +36,11 @@
             <div class="card-body d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <div class="image-container">
+                        <a href="{{ route('material.add', ['categoria_id' => $categoria->id]) }}">
                             <button type="button" class="btn btn-outline">
                                 <i class="fa fa-plus fa-3x"></i>
                             </button>
+                        </a>
                     </div>
                     <div>
                         <h5 class="fonteBold">Adicionar Material</h5>
@@ -41,15 +61,13 @@
                                 <input type="checkbox" class="form-check-input" id="material_{{ $materiais->id }}"
                                     name="materiais[]" value="{{ $materiais->id }}">
                             </div>
-                            <div class="image-container">
-                                <img src="{{ asset('storage/'. $materiais->ficheiro) }}" alt="">
-                            </div>
                             <div>
                                 <h5 class="fonteBold">{{ $materiais->titulo }}</h5>
                                 <p class="fontePrincipal">{{ Str::limit($materiais->texto, 70) }}</p>
                             </div>
                         </div>
-                        <a href="{{ route('material.detalhes', ['id' => $materiais->id]) }}" class="info-link d-flex align-items-center fontePrincipal">
+                        <a href="{{ route('material.detalhes', ['id' => $materiais->id]) }}"
+                            class="info-link d-flex align-items-center fontePrincipal">
                             Mais Informação <span class="ms-2">→</span>
                         </a>
                     </div>
