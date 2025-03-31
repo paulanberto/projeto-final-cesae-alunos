@@ -1,5 +1,6 @@
 @extends('layouts.fo_layout')
 @section('content')
+{{dd($material)}}
     <link rel="stylesheet" href="{{ asset('css/material.css') }}">
     <link rel="stylesheet" href="{{ asset('css/addtema.css') }}">
 
@@ -63,25 +64,25 @@
                             <h5 class="fonteBold">Descrição</h5>
                             <p>{{ $material->texto }}</p>
 
-                            <div class="secaoComentarios">
-                                {{-- @if ($post->children->isEmpty()) --}}
+                           {{--  <div class="secaoComentarios">
+                                 @if ($material->children->isEmpty())
                                     <p> sem comentários</p>
-                                {{-- @else --}}
-                                    {{-- @foreach ($post->children as $comment) --}}
+                                @else
+                                     @foreach ($material->children as $comment)
                                         <div class="comentario">
-                                            {{-- <h4> {{$comment->user->name}} </h4>
-                                            <p> {{$comment->texto}} </p> --}}
+                                             <h4> {{$comment->user->name}} </h4>
+                                            <p> {{$comment->texto}} </p>
                                         </div>
-                                    {{-- @endforeach
+                                     @endforeach
                                 @endif --}}
                                 <div>
                                     <form action="{{route('forum.comment')}}" method="POST">
                                         @csrf
                                         <p>Junte-se à discussão</p>
                                         <input type="text" name="texto">
-                                        {{-- <input type="hidden" name="parent_id" value="{{$post->id}}">
-                                        <input type="hidden" name="categoria_id" value="{{$post->categoria_id}}">
-                                        <input type="hidden" name="parent_type_id" value="{{$post->post_type_id}}"> --}}
+                                        {{-- <input type="hidden" name="parent_id" value="{{$material->id}}">
+                                        <input type="hidden" name="categoria_id" value="{{$material->categoria_id}}">
+                                        <input type="hidden" name="parent_type_id" value="{{$material->post_type_id}}"> --}}
                                         <input type="submit">
                                     </form>
                                 </div>

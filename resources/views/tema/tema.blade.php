@@ -30,6 +30,7 @@
         @csrf
         <div class="row mt-5">
             @foreach ($tema as $temas)
+            @if (!$temas->exclusivoForum)
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body d-flex flex-column">
@@ -39,7 +40,7 @@
                                         name="temas[]" value="{{ $temas->id }}">
                                 </div>
                                 <div class="col-md-4">
-                                    <img src="{{ asset('storage/'. $temas->icons) }}" class="img-fluid rounded-start" alt="...">
+                                    <img src="{{ asset( $temas->icons) }}" class="img-fluid rounded-start" alt="...">
                                 </div>
                                 <div class="col-md-8">
                                     <h5 class="fontePrincipal">{{ $temas->nome }}</h5>
@@ -54,6 +55,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             @endforeach
             <div id="botaoDeletar" class="text-center mt-4 mb-4" style="display: none;">
                 <button class="btn btn-danger rounded-pill px-3" type="submit">Excluir</button>

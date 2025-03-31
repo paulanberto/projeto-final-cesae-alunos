@@ -160,25 +160,25 @@ class MaterialController extends Controller
         }
     }
 
-    // public function comment(Request $request)
-    // {
-    //     $request->validate([
-    //         'texto' => 'required|string',
-    //         'parent_id' => 'required|exists:posts,id',
-    //         'categoria_id' => 'required | exists:categorias,id'
-    //     ]);
+    public function comment(Request $request)
+     {
+         $request->validate([
+             'texto' => 'required|string',
+             'parent_id' => 'required|exists:posts,id',
+             'categoria_id' => 'required | exists:categorias,id'
+         ]);
 
 
-    //     Post::create([
-    //         'user_id' => Auth::id(),
-    //         'categoria_id' => $request->categoria_id,
-    //         'post_type_id' => 4,
-    //         'texto' => $request->texto,
-    //         'parent_id' => $request->parent_id
-    //     ]);
+         Post::create([
+             'user_id' => Auth::id(),
+             'categoria_id' => $request->categoria_id,
+             'post_type_id' => 4,
+             'texto' => $request->texto,
+             'parent_id' => $request->parent_id
+         ]);
 
-    //     return redirect()->back();
-    // }
+         return redirect()->back();
+        }
 
     public function deleteMaterial(Request $request){
 

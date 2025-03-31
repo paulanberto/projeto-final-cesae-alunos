@@ -1,26 +1,22 @@
 nav {
     background: linear-gradient(to left, #40155e, #530d6e,#ffffff);
-    color: white;
+
     padding: 10px 0;
 }
 
-nav .nav-link {
-    color: rgba(255, 255, 255, 0.8) !important;
+.nav-link {
+    margin-left: 20px;
+    font-size: 17px;
+    color: #241595!important;
+    font-family: 'ChakraPetch-Light', sans-serif;
+    font-weight: bold;
 }
 
-nav .nav-link:hover {
-    color: white !important;
+.user{
+    color: white!important;
+    font-size: 20px;
 }
 
-nav .link-body-emphasis,
-nav .link-secondary {
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-nav .link-body-emphasis:hover,
-nav .link-secondary:hover {
-    color: white !important;
-}
 
 
 .botaoPrincipal{
@@ -70,9 +66,4 @@ nav .link-secondary:hover {
     text-align: center;
     font-size: 16px;
     font-family: 'ChakraPetch-Light', sans-serif;
-}
-
-.logo{
-    font-family: 'ChakraPetch-Light', sans-serif;
-    color:  #7426aa;
 }
