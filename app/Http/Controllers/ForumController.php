@@ -58,7 +58,30 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /* dd($request); */
+
+        $request->validate([
+            'titulo' => 'required|string',
+            'texto' => 'required|string',
+            'categoria_id' => 'required | exists:categorias,id',
+            'post_type_id' => 'required | exists:tipo_post,id',
+            'tags' => 'required'
+        ]);
+
+        $post = Post::create([
+            'user_id' => Auth::id(),
+            'categoria_id' => $request->categoria_id,
+            'post_type_id' => $request->post_type_id,
+            'titulo' => $request->titulo,
+            'texto' => $request->texto,
+        ]);
+
+
+        foreach ($request->tags as $tag) {
+            $post->tags()->attach(Tag::where('id', $tag)->pluck('id'));
+        };
+
+        return redirect()->route('forum.list', $request->categoria_id);
     }
 
     /**

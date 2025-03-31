@@ -15,7 +15,11 @@
                 <h3 class="fonteBold"> {{$post->titulo}} </h3>
                 <p> {{$post->texto}} </p>
                 <span class="postAutor">
-                    por {{$post->user->name}} ({{$post->user->curso->nome}} {{$post->user->curso->edicao}}) <br>
+                    por {{$post->user->name}}
+                        @if ($post->user->curso)
+                            ({{$post->user->curso->nome}} {{$post->user->curso->edicao}})
+                        @endif
+                         <br>
                         {{$post->created_at}}
                 </span>
             </div>

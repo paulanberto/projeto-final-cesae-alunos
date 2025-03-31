@@ -8,17 +8,11 @@
 
 @section('content')
 
-{{-- <h1>{{$id}}</h1> --}}
-
-{{-- @foreach ($allTags as $tag)
-    <h1> {{$tag->nome}} </h1>
-
-@endforeach --}}
-
 <div class="col-12 col-lg-8">
     <h1 class="fonteBold forumTitle">Nova dúvida/discussão</h1>
     <div class="createPostForm">
-        <form>
+        <form action="{{route('forum.store')}}" method="POST">
+            @csrf
             <div class="row g-2 mb-3">
                 <label for="inputTitulo" class="form-label fontePrincipal">Título</label>
                 <div class="col-12 col-lg-7 align-self-start">
@@ -40,11 +34,13 @@
             <div class="tagChecks mb-3" id="tagChecks">
 
                 @foreach ($allTags as $tag)
-                    <input type="checkbox" class="btn-check" id="btn-check-{{$tag->id}}" autocomplete="off">
-                    <label type="button" class="tagCheckButton btn btn-primary fontePrincipal" data-bs-toggle="button"
-                        for="btn-check-{{$tag->id}}"> {{$tag->nome}} </label>
+                    <input type="checkbox" class="btn-check" id="btn-check-{{$tag->id}}" autocomplete="off"
+                        name="tags[]" value="{{$tag->id}}">
+                    <label type="button" class="tagCheckButton btn fontePrincipal" {{-- data-bs-toggle="button" --}}
+                        for="btn-check-{{$tag->id}}" id="tagButton-{{$tag->id}}"> {{$tag->nome}} </label>
                 @endforeach
             </div>
+            <input hidden type="text" name="categoria_id" value="{{$id}}">
             <button type="submit" class="botaoPrincipal rounded-pill px-3">Submit</button>
         </form>
     </div>
