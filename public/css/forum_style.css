@@ -20,6 +20,16 @@
     text-align: end;
 }
 
+.forumTitle{
+    margin: 15px;
+    margin-bottom: 6%;
+}
+
+.newPostCard:hover{
+    background-color: rgb(213, 210, 206);
+    transition: 0.3s;
+}
+
 .tableTag{
     background-color: rgba(183, 183, 183, 0.585);
     margin-right: 4px;
@@ -44,6 +54,55 @@
     font-size: smaller;
 }
 
+.secaoPost{
+    background-color: rgba(219, 217, 213, 0.33);
+    padding: 5%;
+    border-radius: 15px;
+    box-shadow: 10px 10px 5px #9750ca;
+}
+
 .secaoComentarios{
     margin-top: 12%;
+}
+
+.comentario{
+    background-color: rgba(219, 217, 213, 0.33);
+    padding: 5%;
+    border-radius: 15px;
+    box-shadow: 10px 10px 5px #9750ca;
+    margin-bottom: 5%;
+}
+
+.commentInput{
+    width: 90%;
+    margin-bottom: 5px;
+}
+
+.createPostForm{
+    background-color: rgba(219, 217, 213, 0.33);
+    padding: 5%;
+    border-radius: 15px;
+    box-shadow: 10px 10px 5px #9750ca;
+    margin-bottom: 5%;
+
+    label{
+        margin-bottom: 8px;
+    }
+
+    .tagCheckButton{
+        margin-bottom: 4px;
+        background-color: #ac8fc0;
+        border-radius: 2px;
+        border-color: #7426aa;
+    }
+
+    .tagCheckButton:hover{
+        background-color: #63119d !important;
+        border-color: #570492 !important;
+    }
+
+    .active{
+        background-color: #7426aa !important;
+        border-color: #570492 !important;
+    }
 }

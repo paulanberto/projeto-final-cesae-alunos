@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +28,7 @@ class ForumController extends Controller
     public function list(string $id) {
 
         $categoria = DB::table('categorias')
-        ->select('nome')
+        ->select('nome', 'id')
         ->where('id', $id)
         ->first();
         // acessar posts da categoria pelo id
@@ -46,9 +47,10 @@ class ForumController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $id)
     {
-        //
+        $allTags = Tag::all();
+        return view('forum.forum_create', compact('id', 'allTags'));
     }
 
     /**
@@ -78,6 +80,12 @@ class ForumController extends Controller
             'texto' => $request->texto,
             'parent_id' => $request->parent_id
         ]);
+
+        if ($request->parent_type_id == 2) {
+            DB::table('users')->
+            where('id', Auth::id())->
+            increment('saldo_pontos', 2);
+        }
 
         return redirect()->back();
     }

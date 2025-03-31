@@ -10,7 +10,25 @@
 
 
     <div class="container">
-        <h1 class="fonteBold"> {{$categoria->nome}} </h1>
+        <h1 class="fonteBold forumTitle"> {{$categoria->nome}} </h1>
+
+        <a href="{{route('forum.create', $categoria->id)}}">
+            <div class="card newPostCard mb-3">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="image-container">
+                                <button type="button" class="btn btn-outline">
+                                    <i class="fa fa-plus fa-2x"></i>
+                                </button>
+                        </div>
+                        <div>
+                            <h5 class="fonteBold">Nova dúvida ou discussão</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
         <table class="table align-middle table-hover fontePrincipal">
             <thead>
             <tr>
