@@ -1,6 +1,7 @@
 @extends('layouts.fo_layout')
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/material.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/addtema.css') }}">
 
     @if(session('points_message'))
         <div class="alert alert-info">
@@ -15,7 +16,7 @@
     @endif
 
     <div class="container mt-5">
-        <div class="card shadow-sm rounded-3 p-4">
+        <div class="card rounded-3 p-4">
             <div class="mb-3 d-flex justify-content-between align-items-center">
                 <h2 class="fonteBold">{{ $material->titulo }}</h2>
                 <a href="{{ route('material.show', ['id' => $material->categoria_id]) }}" class="btn btn-outline-secondary">
@@ -48,7 +49,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="card">
+                    <div class="card shadow-sm">
                         <div class="card-header fonteBold">
                             Informações do Material
                         </div>

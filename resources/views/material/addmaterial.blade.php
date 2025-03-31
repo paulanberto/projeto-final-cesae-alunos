@@ -4,7 +4,7 @@
     <script src="{{ asset('js/addmaterial.js') }}"></script>
 
     <div class="container mt-5">
-        <div class="card shadow-sm rounded-3 p-4 mx-auto" style="max-width: 400px;">
+        <div class="card rounded-3 p-4 mx-auto" style="max-width: 400px;">
             <h4 class="fonteBold">Adicionar Material</h4>
 
             <form action="{{ route('material.create') }}" method="POST" enctype="multipart/form-data">
