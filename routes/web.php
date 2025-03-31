@@ -26,6 +26,8 @@ Route::fallback(function () {
 
 Route::get('/design', [DesignController::class, 'index'])->name('design');
 
+Route::get('/politicas', [DashboardController::class, 'politicas'])->name('politicas');
+
 // Rota users
 Route::get('/users', [UserController::class, 'listUsers'])->name('users.list');
 Route::get('/add-users', [UserController::class, 'addUsers'])->name('users.add');
@@ -45,13 +47,17 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/user/{id}/delete', [UserController::class, 'deleteUserFromDB'])->name('users.delete');
 
+
     Route::get('/dashboard', action: [DashboardController::class, 'getDashboard'])->name('dashboard.view');
+
+
+
 
     Route::prefix('tema')->group(function () {
 
         Route::get('/', [TemaController::class, 'index'])->name('tema');
 
-        Route::middleware([IsAdmin::class])->group(function(){
+        Route::middleware([IsAdmin::class])->group(function () {
             //rota para a página de adicionar temas, feita para adicionar temas, leva para o formulário de adição
             Route::get('/add', [TemaController::class, 'addTema'])->name('tema.add');
 
@@ -68,10 +74,9 @@ Route::middleware('auth')->group(function () {
 
         //rota para deletar temas
         Route::get('/delete/{id}', [TemaController::class, 'deleteTema'])->name('tema.delete');
-
     });
 
-    Route::get('/tema/{id}/material', [MaterialController::class,'showMaterial'])->name('tema.material');
+    Route::get('/tema/{id}/material', [MaterialController::class, 'showMaterial'])->name('tema.material');
 
     Route::get('/material/tema/{id}', [MaterialController::class, 'showMaterial'])->name('material.show');
 
@@ -106,7 +111,5 @@ Route::middleware('auth')->group(function () {
         Route::get('/post/{id}', [ForumController::class, 'show'])->name('forum.show');
 
         Route::post('/comment', [ForumController::class, 'comment'])->name('forum.comment');
-
     });
-
 });
