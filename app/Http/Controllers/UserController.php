@@ -20,7 +20,7 @@ class UserController extends Controller
         return view('user.add_users', compact('cursos'));
     }
 
-   
+
 
     public function createUser(Request $request)
     {
@@ -178,29 +178,4 @@ class UserController extends Controller
         // return back();
     }
 
-
-    //COnflito com nomes das funções validação update user
-    /*     public function updateUser(Request $request, $id)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|regex:/@cesae\.pt$/',
-            'curso_id' => 'nullable|exists:cursos,id',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $userData = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'curso_id' => $request->curso_id,
-        ];
-
-        DB::table('users')->where('id', $id)->update($userData);
-
-        return redirect()->route('users.view.single', $id)->with('success', 'User updated successfully.');
-    }
- */
 }

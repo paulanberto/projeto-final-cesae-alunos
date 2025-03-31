@@ -23,6 +23,10 @@ class DashboardController extends Controller
         // }
 
         //return view('dashboard', compact('name', 'saldo_pontos', 'user_type', 'curso_id' ));
+
+
+
+        
         return view('dashboard');
     }
 
