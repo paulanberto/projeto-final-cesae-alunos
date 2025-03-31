@@ -55,7 +55,7 @@
 }
 
 .secaoPost{
-    background-color: rgb(224, 218, 210);
+    background-color: rgba(219, 217, 213, 0.33);
     padding: 5%;
     border-radius: 15px;
     box-shadow: 10px 10px 5px #9750ca;
@@ -66,7 +66,7 @@
 }
 
 .comentario{
-    background-color: rgb(224, 218, 210);
+    background-color: rgba(219, 217, 213, 0.33);
     padding: 5%;
     border-radius: 15px;
     box-shadow: 10px 10px 5px #9750ca;
@@ -79,7 +79,7 @@
 }
 
 .createPostForm{
-    background-color: rgb(224, 218, 210);
+    background-color: rgba(219, 217, 213, 0.33);
     padding: 5%;
     border-radius: 15px;
     box-shadow: 10px 10px 5px #9750ca;
@@ -97,10 +97,12 @@
     }
 
     .tagCheckButton:hover{
-        background-color: #7426aa !important;
+        background-color: #63119d !important;
         border-color: #570492 !important;
     }
-    .tagCheckButton:active{
+
+    .active{
         background-color: #7426aa !important;
+        border-color: #570492 !important;
     }
 }
