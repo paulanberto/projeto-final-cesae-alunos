@@ -20,6 +20,8 @@ class UserController extends Controller
         return view('user.add_users', compact('cursos'));
     }
 
+   
+
     public function createUser(Request $request)
     {
         // Validar os dados de entrada
@@ -85,9 +87,9 @@ class UserController extends Controller
 
         // Apply search if provided
         if ($search) {
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('users.name', 'like', "%{$search}%")
-                  ->orWhere('users.email', 'like', "%{$search}%");
+                    ->orWhere('users.email', 'like', "%{$search}%");
 
                 // Only include curso search if the table exists
                 if (Schema::hasTable('cursos')) {
@@ -178,7 +180,7 @@ class UserController extends Controller
 
 
     //COnflito com nomes das funções validação update user
-/*     public function updateUser(Request $request, $id)
+    /*     public function updateUser(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
@@ -201,8 +203,4 @@ class UserController extends Controller
         return redirect()->route('users.view.single', $id)->with('success', 'User updated successfully.');
     }
  */
-
-
-
-
 }

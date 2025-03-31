@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -8,7 +9,8 @@ use App\Models\User;
 
 class DashboardController extends Controller
 {
-       public function getDashboard(){
+    public function getDashboard()
+    {
 
         //buscar todas as informaçoes que interessam sobre o user
         // $user = Auth::user();
@@ -22,8 +24,10 @@ class DashboardController extends Controller
 
         //return view('dashboard', compact('name', 'saldo_pontos', 'user_type', 'curso_id' ));
         return view('dashboard');
-
     }
 
-
+    public function politicas()
+    {
+        return view('politicas');
+    }
 }
