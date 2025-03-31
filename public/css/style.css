@@ -1,5 +1,5 @@
 nav {
-    background: linear-gradient(to left, #40155e, #530d6e,#a985ba);
+    background: linear-gradient(to left, #40155e, #530d6e,#ffffff);
     color: white;
     padding: 10px 0;
 }
@@ -70,4 +70,9 @@ nav .link-secondary:hover {
     text-align: center;
     font-size: 16px;
     font-family: 'ChakraPetch-Light', sans-serif;
+}
+
+.logo{
+    font-family: 'ChakraPetch-Light', sans-serif;
+    color:  #7426aa;
 }

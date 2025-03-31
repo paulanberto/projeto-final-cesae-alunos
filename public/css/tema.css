@@ -1,0 +1,14 @@
+.card .col-md-4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .card .col-md-4 img {
+    margin-top: 20px;
+    margin-right: 40px;
+    max-width: 70%;
+    max-height: 100%;
+    object-fit: contain;
+  }

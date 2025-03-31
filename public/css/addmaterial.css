@@ -8,3 +8,9 @@
     background-color: #f0f0f0;
     border: 1px solid #ddd;
 }
+
+.card{
+    border-radius: 15px;
+    box-shadow: 10px 10px 5px #9750ca;
+    margin-bottom: 50px; 
+}
