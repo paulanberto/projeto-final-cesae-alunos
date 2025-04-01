@@ -94,6 +94,8 @@
         background-color: #ac8fc0;
         border-radius: 2px;
         border-color: #7426aa;
+        font-size:small;
+        padding: 6px;
     }
 
     .tagCheckButton:hover{
