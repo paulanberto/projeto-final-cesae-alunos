@@ -58,15 +58,18 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-        /* dd($request); */
-
         $request->validate([
             'titulo' => 'required|string',
             'texto' => 'required|string',
             'categoria_id' => 'required | exists:categorias,id',
             'post_type_id' => 'required | exists:tipo_post,id',
-            'tags' => 'required'
         ]);
+
+        if($request->tags){
+            $request->validate([
+                'tags.*' => 'exists:tags,id'
+            ]);
+        }
 
         $post = Post::create([
             'user_id' => Auth::id(),
@@ -82,10 +85,12 @@ class ForumController extends Controller
             increment('saldo_pontos', 2);
         }
 
+        if($request->tags){
+            foreach ($request->tags as $tag) {
+                $post->tags()->attach(Tag::where('id', $tag)->pluck('id'));
+            };
+        }
 
-        foreach ($request->tags as $tag) {
-            $post->tags()->attach(Tag::where('id', $tag)->pluck('id'));
-        };
 
         return redirect()->route('forum.list', $request->categoria_id);
     }
