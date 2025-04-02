@@ -65,7 +65,7 @@ class MaterialController extends Controller
             session()->put($key, true);
         }
 
-        $material = DB::table('posts')
+        /* $material = DB::table('posts')
             ->join('users', 'posts.user_id', '=', 'users.id')
             ->join('categorias', 'posts.categoria_id', '=', 'categorias.id')
             ->select(
@@ -75,16 +75,18 @@ class MaterialController extends Controller
                 'ficheiro'
             )
             ->where('posts.id', $id)
-            ->first();
+            ->first(); */
 
-        if (!$material) {
+        $post = Post::where('id', $id)->first();
+
+        if (!$post) {
             return redirect()->route('material')->with('error', 'Material não encontrado');
         }
 
-        $fileExtension = pathinfo($material->ficheiro, PATHINFO_EXTENSION);
+        $fileExtension = pathinfo($post->ficheiro, PATHINFO_EXTENSION);
         $fileType = $this->determineFileType($fileExtension);
 
-        return view('material.detalhesmaterial', compact('material', 'fileType'));
+        return view('material.detalhesmaterial', compact('post', 'fileType'));
     }
 
     private function determineFileType($extension) {
@@ -160,25 +162,25 @@ class MaterialController extends Controller
         }
     }
 
-    // public function comment(Request $request)
-    // {
-    //     $request->validate([
-    //         'texto' => 'required|string',
-    //         'parent_id' => 'required|exists:posts,id',
-    //         'categoria_id' => 'required | exists:categorias,id'
-    //     ]);
+     public function comment(Request $request)
+     {
+         $request->validate([
+             'texto' => 'required|string',
+             'parent_id' => 'required|exists:posts,id',
+             'categoria_id' => 'required | exists:categorias,id'
+         ]);
 
 
-    //     Post::create([
-    //         'user_id' => Auth::id(),
-    //         'categoria_id' => $request->categoria_id,
-    //         'post_type_id' => 4,
-    //         'texto' => $request->texto,
-    //         'parent_id' => $request->parent_id
-    //     ]);
+         Post::create([
+             'user_id' => Auth::id(),
+             'categoria_id' => $request->categoria_id,
+             'post_type_id' => 4,
+             'texto' => $request->texto,
+             'parent_id' => $request->parent_id
+         ]);
 
-    //     return redirect()->back();
-    // }
+         return redirect()->back();
+     }
 
     public function deleteMaterial(Request $request){
 
