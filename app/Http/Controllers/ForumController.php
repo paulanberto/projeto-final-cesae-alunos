@@ -76,6 +76,12 @@ class ForumController extends Controller
             'texto' => $request->texto,
         ]);
 
+        if ($request->post_type_id == 2) {
+            DB::table('users')->
+            where('id', Auth::id())->
+            increment('saldo_pontos', 2);
+        }
+
 
         foreach ($request->tags as $tag) {
             $post->tags()->attach(Tag::where('id', $tag)->pluck('id'));
@@ -146,6 +152,8 @@ class ForumController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::find($id);
+        Post::where('id', $id)->delete();
+        return redirect()->route('forum.list', $post->categoria->id);
     }
 }
