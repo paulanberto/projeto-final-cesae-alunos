@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="password-reset-container">
+    <div class="password-reset-container background-purple">
         <div class="password-reset-card" style="max-width: 600px; width: 90%;">
             <div class="form-header">
                 <img src="{{ asset('imagens/logoCorrido.png') }}" alt="Logo" class="logo">

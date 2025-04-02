@@ -27,13 +27,13 @@ body {
 
 /* Classes para as fontes */
 .fontePrincipal {
-  color: #7426aa;
+  color: #392465;
   font-weight: 650;
   font-family: 'ChakraPetch-Light', sans-serif;
 }
 
 .fonteBold {
-  color: #7426aa !important;
+  color: #392465 !important;
   font-weight: 650;
   font-family: 'ChakraPetch-SemiBold', sans-serif;
   margin-top: 20px;
