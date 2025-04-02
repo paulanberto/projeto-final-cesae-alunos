@@ -27,18 +27,19 @@ body {
 
 /* Classes para as fontes */
 .fontePrincipal {
-  color: #392465;
+  color: #7426aa;
   font-weight: 650;
   font-family: 'ChakraPetch-Light', sans-serif;
 }
 
 .fonteBold {
-  color: #392465 !important;
+  color: #7426aa !important;
   font-weight: 650;
   font-family: 'ChakraPetch-SemiBold', sans-serif;
+  margin-top: 20px;
 }
 
-/* Container principal */
+
 .password-reset-container {
   display: flex;
   justify-content: center;
@@ -48,18 +49,18 @@ body {
   position: relative;
 }
 
-/* Background roxo que cobre a tela inteira */
+
 .background-purple {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #6a1b9a; /* Cor roxa principal */
+  background-color: #6a1b9a; 
   z-index: 1;
 }
 
-/* Card do formulário */
+
 .password-reset-card {
   background-color: white;
   border-radius: 10px;
@@ -71,7 +72,7 @@ body {
   z-index: 10;
 }
 
-/* Cabeçalho do formulário */
+
 .form-header {
   text-align: center;
   margin-bottom: 35px;
@@ -112,12 +113,12 @@ body {
 }
 
 .form-control:focus {
-  border-color: #392465;
+  border-color: #7426aa;
   box-shadow: 0 0 0 0.2rem rgba(57, 36, 101, 0.25);
   outline: none;
 }
 
-/* Botão de redefinição */
+
 .reset-button {
   background-color: #7426aa;
   border: none;
@@ -133,7 +134,7 @@ body {
 }
 
 .reset-button:hover {
-  background-color: #4e3a7d;
+  background-color: #7426aa;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -156,7 +157,7 @@ body {
 }
 
 .login-link a:hover {
-  color: #6a1b9a;
+  color: #7426aa;
   text-decoration: underline;
 }
 
@@ -216,4 +217,10 @@ body {
   .form-group {
     margin-bottom: 20px;
   }
+}
+
+.logo{
+  margin-top: -30px;
+  height: 130px; 
+  width: 350px;
 }

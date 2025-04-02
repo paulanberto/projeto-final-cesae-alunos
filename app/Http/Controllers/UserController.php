@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Access\AuthorizationException;
 
 
 class UserController extends Controller
@@ -17,16 +21,20 @@ class UserController extends Controller
     public function addUsers()
     {
         $cursos = DB::table('cursos')->get();
-        return view('user.add_users', compact('cursos'));
+
+        $anos = range(1980, 2030);
+
+        return view('user.add_users', compact('cursos', 'anos'));
     }
 
 
 
     public function createUser(Request $request)
     {
-        // Validar os dados de entrada
+
         $validator = Validator::make($request->all(), [
             'curso_id' => 'required|exists:cursos,id',
+            'ano' => 'required|integer|between:1980,2030',
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email|regex:/@msft\.cesae\.pt$/',
             'email_confirmation' => 'required|email|same:email',
@@ -41,6 +49,8 @@ class UserController extends Controller
         ], [
             'curso_id.required' => 'Por favor, selecione um curso',
             'curso_id.exists' => 'O curso selecionado não é válido',
+            'ano.required' => 'Por favor, selecione um ano',
+            'ano.between' => 'O ano deve estar entre 1980 e 2030',
             'email.regex' => 'O email deve ser do domínio @msft.cesae.pt',
             'email_confirmation.same' => 'A confirmação de email não corresponde ao email fornecido',
             'password.min' => 'A senha deve ter pelo menos 8 caracteres',
@@ -55,22 +65,45 @@ class UserController extends Controller
 
 
         try {
-            // Criar o novo usuário
+
             $user = User::create([
-                'curso_id' => $request->curso_id, // Salvar o ID do curso
+                'curso_id' => $request->curso_id,
+                'ano' => $request->ano,
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
 
-            // Redirecionar para a página de login com uma mensagem de sucesso
-            return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso. Por favor, faça login.');
+            event(new Registered($user));
+
+            session(['register_email' => $user->email]);
+
+            return redirect()->route('verification.notice')->with('success', 'Cadastro realizado com sucesso. Por favor, verifique seu e-mail para confirmar o registro.');
         } catch (\Exception $e) {
-            // Em caso de erro, redirecionar de volta com mensagem de erro
             return redirect()->back()->with('error', 'Ocorreu um erro ao criar o usuário: ' . $e->getMessage())->withInput();
         }
     }
 
+    public function verifyEmail($id)
+    {
+        try {
+            // Encontrar o usuário pelo ID
+            $user = User::findOrFail($id);
+
+            // Se o e-mail já foi verificado
+            if ($user->hasVerifiedEmail()) {
+                return redirect('/login')->with('success', 'E-mail já foi verificado anteriormente. Você pode fazer login.');
+            }
+
+            // Verificar o e-mail
+            $user->markEmailAsVerified();
+
+            return redirect('/login')->with('success', 'E-mail verificado com sucesso! Agora você pode fazer login.');
+        } catch (\Exception $e) {
+            Log::error('Erro na verificação de e-mail: ' . $e->getMessage());
+            return redirect('/login')->with('error', 'Ocorreu um erro ao verificar seu e-mail. Por favor, tente novamente.');
+        }
+    }
     public function listUsers()
     {
         $users = User::all();
@@ -125,11 +158,17 @@ class UserController extends Controller
         $user = DB::table('users')->where('id', $id)->first();
         $cursos = DB::table('cursos')->get();
 
+        $anoAtual = date('Y');
+        $anos = [];
+        for ($i = 0; $i <= 5; $i++) {
+            $anos[] = $anoAtual + $i;
+        }
+
         if (!$user) {
             return redirect()->route('users.view')->with('error', 'User not found.');
         }
 
-        return view('user.edit_user', compact('user', 'cursos'));
+        return view('user.edit_user', compact('user', 'cursos', 'anos'));
     }
 
     public function updateUser(Request $request, $id)
@@ -138,6 +177,7 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'curso' => 'required|string|max:255',
+            'ano' => 'required|integer|digits:4',
             'name' => 'required|string|max:255',
             'email' => 'required|email|regex:/@msft\.cesae\.pt$/|unique:users,email,' . $id,
         ]);
@@ -149,6 +189,7 @@ class UserController extends Controller
         try {
             $user->update([
                 'curso' => $request->curso,
+                'ano' => $request->ano,
                 'name' => $request->name,
                 'email' => $request->email,
             ]);
@@ -177,5 +218,4 @@ class UserController extends Controller
         // db::table('users')->where('id', $id)->delete();
         // return back();
     }
-
 }

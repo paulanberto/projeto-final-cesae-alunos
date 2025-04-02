@@ -1,7 +1,9 @@
 
 <?php
 
+use Illuminate\Http\Request;
 use App\Http\Middleware\IsAdmin;
+use Illuminate\Support\Facades\Log;
 use App\Http\Middleware\IsModerador;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -12,21 +14,71 @@ use App\Http\Controllers\DesignController;
 use App\Http\Middleware\IsAdminOrModerator;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Rota de fallback
+//Rota de fallback para páginas não encontradas
 Route::fallback(function () {
     return view('fallback');
 });
 
-
+//Rota para a página geral de design
 Route::get('/design', [DesignController::class, 'index'])->name('design');
 
+//Rota para a página de Politicas de Privacidade e regras
 Route::get('/politicas', [DashboardController::class, 'politicas'])->name('politicas');
+
+
+
+// Rotas de verificação de e-mail (acessíveis sem autenticação)
+Route::get('/email/verify', function () {
+    return view('auth.verify_email');
+})->name('verification.notice');
+
+
+Route::get('/email/verify/{id}', [UserController::class, 'verifyEmail'])
+    ->name('verification.verify');
+
+
+// Rota para processar o link de verificação enviado por e-mail
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    try {
+        $request->fulfill();
+        return redirect('/login')->with('success', 'E-mail verificado com sucesso! Agora você pode fazer login.');
+    } catch (\Exception $e) {
+        Log::error('Erro na verificação de e-mail: ' . $e->getMessage());
+        return redirect('/login')->with('error', 'Ocorreu um erro ao verificar seu e-mail. Por favor, tente novamente.');
+    }
+})->middleware(['signed'])->name('verification.verify');
+
+// Rota para reenvio do e-mail de verificação (sem necessidade de autenticação)
+Route::post('/email/verification-notification', function (Request $request) {
+
+    $email = $request->input('email') ?? session('register_email');
+
+    if (!$email) {
+        return back()->with('error', 'E-mail não fornecido.');
+    }
+
+    $user = \App\Models\User::where('email', $email)->first();
+
+    if (!$user) {
+        return back()->with('error', 'Não foi possível encontrar este e-mail. Por favor, verifique e tente novamente.');
+    }
+
+    if ($user->hasVerifiedEmail()) {
+        return back()->with('success', 'E-mail já verificado. Você pode fazer login.');
+    }
+
+    $user->sendEmailVerificationNotification();
+    return back()->with('message', 'E-mail de verificação reenviado!');
+})->middleware(['throttle:6,1'])->name('verification.send');
+
 
 // Rota users
 Route::get('/users', [UserController::class, 'listUsers'])->name('users.list');
@@ -48,7 +100,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{id}/delete', [UserController::class, 'deleteUserFromDB'])->name('users.delete');
 
 
-    Route::get('/dashboard', action: [DashboardController::class, 'getDashboard'])->name('dashboard.view');
+    Route::get('/dashboard', action: [DashboardController::class, 'getDashboard'])->name('dashboard.view')->middleware(['auth', 'verified']);;
 
 
 
@@ -114,6 +166,5 @@ Route::middleware('auth')->group(function () {
         Route::get('/create/{id}', [ForumController::class, 'create'])->name('forum.create');
 
         Route::post('/store', [ForumController::class, 'store'])->name('forum.store');
-
     });
 });

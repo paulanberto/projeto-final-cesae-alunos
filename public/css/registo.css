@@ -28,7 +28,7 @@ body {
 
 .imagem-background {
   background-color: #F6F6F6;
-  background-image: url('/imagens/cesae_logo.png');
+  background-image: url('/imagens/codigoAbertoLogo.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -55,6 +55,7 @@ body {
   color: #392465;
   font-weight: 650;
   font-family: 'ChakraPetch-SemiBold', sans-serif;
+  margin-left: 28px;
 }
 
 .fonteLink{
@@ -81,7 +82,7 @@ body {
   font-family: 'ChakraPetch-Light', sans-serif;
 }
 
-/* Alertas */
+
 .alert {
   border-radius: 8px;
   margin-top: 5px;
@@ -99,7 +100,7 @@ body {
   color: #155724;
 }
 
-/* Layout responsivo */
+
 @media (max-width: 768px) {
   .imagem-background {
       display: none;

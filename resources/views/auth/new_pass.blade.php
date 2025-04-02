@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crie uma nova senha</title>
+    <title>Código Aberto</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/new_pass.css') }}">
 </head>
@@ -13,6 +13,7 @@
 
         <div class="password-reset-card">
             <div class="form-header">
+                <img src="{{ asset('imagens/logoCorrido.png') }}" alt="Logo" class="logo">
                 <h2 class="fonteBold">Crie uma nova senha</h2>
             </div>
 

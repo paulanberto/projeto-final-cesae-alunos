@@ -13,19 +13,24 @@
 }
 
 .fontePrincipal{
-  color: #7426aa;
+  color: #392465;
   font-weight: 600;
   font-family: 'ChakraPetch-Light', sans-serif;
 }
 
 .fonteBold{
-  color: #7426aa;
+  color: #392465;
   font-weight: 600;
   font-family: 'ChakraPetch-SemiBold', sans-serif;
+  padding-bottom: 20px;
 }
 
 .politicas{
   padding: 20px;
   padding-top: 60px;
+}
+
+.p{
+  font-size: 12px;
 }
 
