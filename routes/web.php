@@ -100,9 +100,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{id}/delete', [UserController::class, 'deleteUserFromDB'])->name('users.delete');
 
 
-    Route::get('/dashboard', action: [DashboardController::class, 'getDashboard'])->name('dashboard.view')->middleware(['auth', 'verified']);;
+    Route::get('/dashboard', action: [DashboardController::class, 'getDashboard'])->name('dashboard.view');
     Route::post('/update-profile-image', [DashboardController::class, 'updateProfileImage'])->name('update.profile.image');
-    Route::post('/login', [DashboardController::class, 'deleteOwnAccount'])->name('account.delete')->middleware('auth');
+    Route::post('/user-delete', [DashboardController::class, 'deleteOwnAccount'])->name('account.delete');
 
 
     Route::prefix('tema')->group(function () {
