@@ -54,24 +54,26 @@
             @csrf
 
             @foreach ($material as $materiais)
-                <div class="card mb-3">
-                    <div class="card-body d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center">
-                            <div class="form-check mb-3 material-checkbox" style="display: none;">
-                                <input type="checkbox" class="form-check-input" id="material_{{ $materiais->id }}"
-                                    name="materiais[]" value="{{ $materiais->id }}">
+                @if ($materiais->post_type_id == 1)
+                    <div class="card mb-3">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <div class="form-check mb-3 material-checkbox" style="display: none;">
+                                    <input type="checkbox" class="form-check-input" id="material_{{ $materiais->id }}"
+                                        name="materiais[]" value="{{ $materiais->id }}">
+                                </div>
+                                <div>
+                                    <h5 class="fonteBold">{{ $materiais->titulo }}</h5>
+                                    <p class="fontePrincipal">{{ Str::limit($materiais->texto, 70) }}</p>
+                                </div>
                             </div>
-                            <div>
-                                <h5 class="fonteBold">{{ $materiais->titulo }}</h5>
-                                <p class="fontePrincipal">{{ Str::limit($materiais->texto, 70) }}</p>
-                            </div>
+                            <a href="{{ route('material.detalhes', ['id' => $materiais->id]) }}"
+                                class="info-link d-flex align-items-center fontePrincipal">
+                                Mais Informação <span class="ms-2">→</span>
+                            </a>
                         </div>
-                        <a href="{{ route('material.detalhes', ['id' => $materiais->id]) }}"
-                            class="info-link d-flex align-items-center fontePrincipal">
-                            Mais Informação <span class="ms-2">→</span>
-                        </a>
                     </div>
-                </div>
+                @endif
             @endforeach
 
             <div id="botaoDeletar" class="text-center mt-4 mb-4" style="display: none;">

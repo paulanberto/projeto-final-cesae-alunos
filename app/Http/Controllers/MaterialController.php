@@ -65,18 +65,6 @@ class MaterialController extends Controller
             session()->put($key, true);
         }
 
-        /* $material = DB::table('posts')
-            ->join('users', 'posts.user_id', '=', 'users.id')
-            ->join('categorias', 'posts.categoria_id', '=', 'categorias.id')
-            ->select(
-                'posts.*',
-                'users.name as user_name',
-                'categorias.nome as categoria_nome',
-                'ficheiro'
-            )
-            ->where('posts.id', $id)
-            ->first(); */
-
         $post = Post::where('id', $id)->first();
 
         if (!$post) {
@@ -162,7 +150,9 @@ class MaterialController extends Controller
         }
     }
 
-     public function comment(Request $request)
+
+    public function comment(Request $request)
+
      {
          $request->validate([
              'texto' => 'required|string',
@@ -180,7 +170,9 @@ class MaterialController extends Controller
          ]);
 
          return redirect()->back();
+
      }
+
 
     public function deleteMaterial(Request $request){
 

@@ -62,7 +62,6 @@
 
                             <h5 class="fonteBold">Descrição</h5>
                             <p>{{ $post->texto }}</p>
-
                             <div class="secaoComentarios">
                                 @if ($post->children->isEmpty())
                                     <p> sem comentários</p>
@@ -74,6 +73,7 @@
                                         </div>
                                     @endforeach
                                 @endif
+
                                 <div>
                                     <form action="{{route('forum.comment')}}" method="POST">
                                         @csrf
@@ -82,6 +82,7 @@
                                         <input type="hidden" name="parent_id" value="{{$post->id}}">
                                         <input type="hidden" name="categoria_id" value="{{$post->categoria_id}}">
                                         <input type="hidden" name="parent_type_id" value="{{$post->post_type_id}}">
+
                                         <input type="submit">
                                     </form>
                                 </div>
