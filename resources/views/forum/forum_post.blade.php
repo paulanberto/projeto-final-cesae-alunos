@@ -8,9 +8,9 @@
 
 @section('content')
 
-    <div class="container my-5 fontePrincipal col-lg-6">
+    <div class="container my-5 fontePrincipal col-12 col-lg-10">
         <div class="row">
-            <div class="secaoPost col-11">
+            <div class="secaoPost col-12 px-5">
                 <h3 class="fonteBold"> {{$post->titulo}} </h3>
                 <p> {{$post->texto}} </p>
                 <span class="postAutor">
@@ -23,7 +23,7 @@
                 </span>
             </div>
             @if ((Auth::check() && (Auth::user()->isAdmin() || Auth::user()->isModerador())) || Auth::user()->id == $post->user_id )
-                <div class="col-1">
+                <div class="col-4 align-self-end mt-3">
                     <form action="{{route('forum.delete', $post->id)}}" method="POST">
                         @method('DELETE')
                         @csrf
@@ -41,24 +41,25 @@
                 <h3>Comentários</h3>
                 @foreach ($post->children as $comment)
                     <div class="row">
-                        <div class="comentario col-11">
+                        <div class="comentario col-12 px-5">
                             <h4> {{$comment->user->name}} </h4>
                             <p> {{$comment->texto}} </p>
                         </div>
                         @if ((Auth::check() && (Auth::user()->isAdmin() || Auth::user()->isModerador()))|| Auth::user()->id == $post->user_id)
-                            <div class="col-1">
-                                <form action="{{route('forum.delete', $comment->id)}}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <p><button type="submit" class="btn btn-danger rounded-pill px-3">Excluir comentário</button></p>
-                                </form>
-
+                            <div class="row">
+                                <div class="col-4 justify-self-end mt-3">
+                                    <form action="{{route('forum.delete', $comment->id)}}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <p><button type="submit" class="btn btn-danger rounded-pill px-3">Excluir comentário</button></p>
+                                    </form>
+                                </div>
                             </div>
                         @endif
                     </div>
                 @endforeach
             @endif
-            <div>
+            <div class="comentarioForm">
                 <form action="{{route('forum.comment')}}" method="POST">
                     @csrf
                     <p>Junte-se à discussão</p>

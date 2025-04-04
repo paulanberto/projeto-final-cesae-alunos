@@ -3,7 +3,7 @@
     margin-bottom: 2rem;
     padding: 2%;
     border-color: #7426aa;
-    border-width: 3.5px;
+    border-width: 1.5px;
     border-style: solid;
     box-shadow: 10px 10px 5px #9750ca;
     border-radius: 5px;
@@ -55,22 +55,31 @@
 }
 
 .secaoPost{
-    background-color: rgba(219, 217, 213, 0.33);
+    background-color: rgb(255, 255, 255);
+    border-color: #7426aa;
+    border-width: 1px;
+    border-style: solid;
     padding: 5%;
+    padding-left: 3%;
     border-radius: 15px;
     box-shadow: 10px 10px 5px #9750ca;
 }
 
 .secaoComentarios{
-    margin-top: 12%;
+    margin-top: 3rem;
 }
 
 .comentario{
-    background-color: rgba(219, 217, 213, 0.33);
+    background-color: rgb(255, 255, 255);
+    border-color: #7426aa;
+    border-width: 1px;
+    border-style: solid;
     padding: 5%;
     border-radius: 15px;
     box-shadow: 10px 10px 5px #9750ca;
-    margin-bottom: 5%;
+}
+.comentarioForm{
+    margin-top: 5%
 }
 
 .commentInput{
