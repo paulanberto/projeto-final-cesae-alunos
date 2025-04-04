@@ -48,7 +48,7 @@
 
                     <div class="form-check d-flex mb-3 mt-2">
                         <div class="w-100">
-                            <a href="{{ route('password.request') }}" class="float-right fonteLink">Esqueceu sua
+                            <a href="{{ route('password.request') }}" class="float-right fonteLink">Esqueceu a sua
                                 senha?</a>
                         </div>
                     </div>

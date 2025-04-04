@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redefinir sua senha</title>
+    <title>Código Aberto</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/forgot_password.css') }}">
 </head>
@@ -14,8 +14,10 @@
         <div class="background-purple"></div>
 
         <div class="password-reset-card">
+
             <div class="form-header">
-                <h2 class="fonteBold">Redefinir sua senha</h2>
+                <img src="{{ asset('imagens/logoCorrido.png') }}" alt="Logo" class="logo">
+                <h2 class="fonteBold">Recuperar a sua senha</h2>
             </div>
 
             @if (session('status'))
@@ -39,7 +41,7 @@
                         <div class="alert alert-danger mt-2">{{ $message }}</div>
                     @enderror
                     <small class="form-text text-muted mt-2">Enviaremos um link para redefinir sua senha para o email
-                        cadastrado.</small>
+                        registado.</small>
                 </div>
 
                 <button class="reset-button rounded-pill px-3 fontePrincipal" type="submit">
