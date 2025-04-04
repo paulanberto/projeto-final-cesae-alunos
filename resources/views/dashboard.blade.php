@@ -118,14 +118,14 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Tem certeza que deseja apagar sua conta? Esta acção não é reversivel.</p>
-                                    <p>Todos os seus dados, incluindo posts e questões, serão permanentemente removidos.</p>
+                                    <p class="fontePrincipal">Tem certeza que deseja apagar sua conta? Esta acção não é reversivel.</p>
+                                    <p class="fontePrincipal">Todos os seus dados, incluindo posts e questões, serão permanentemente removidos.</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="botaoPrincipal rounded-pill px-3" data-bs-dismiss="modal">Cancelar</button>
                                     <form action="{{ route('account.delete') }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="btn btn-danger">Sim, Apagar a minha conta do CodigoAberto</button>
+                                        <button type="submit" class="btn btn-danger rounded-pill px-3">Apagar</button>
                                     </form>
                                 </div>
                             </div>
