@@ -1,18 +1,26 @@
 @extends('layouts.fo_layout')
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/viewusers.css') }}">
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+
+
     <section class="table-section">
-        <div class="table-title">
-            <h2>Area Utilizadores</h2>
-            <form>
-                <input type="text" id="" name="search" value="{{ request()->query('search') }}">
-                <button type="submit" class="btn btn-secondary">Search</button>
+        <div class="table-title d-flex justify-content-between align-items-center mb-4">
+            <h2 class="m-0 fontePrincipal">Area Utilizadores</h2>
+            <form class="search-form d-flex">
+                <div class="input-group">
+                    <input type="text" class="form-control search-input" name="search" placeholder="Pesquisar utilizadores..." value="{{ request()->query('search') }}">
+                    <button type="submit" class="btn btn-primary search-button">
+                        <i class="fa fa-search"></i> Pesquisar
+                    </button>
+                </div>
             </form>
         </div>
 
         <div class="table-responsive">
             <table class="table table-hover ">
-                <thead>
+                <thead class="fonteBold">
                     <tr>
                         <th scope="col">Nome</th>
                         <th scope="col">Email</th>
@@ -20,7 +28,7 @@
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="fontePrincipal">
                     @foreach ($users as $user)
                         <tr>
                             <td>{{ $user->name }}</td>
@@ -35,26 +43,38 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('users.view.single', $user->id) }}" class="btn btn-primary rounded-pill px-3">ver</a>
+                                <a href="{{ route('users.view.single', $user->id) }}" class="botaoPrincipal rounded-pill px-3">ver</a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
 
-            <section class="merda">
-                <nav aria-label="Page navigation example">
+            <section>
+                <nav id="pagination-nav"  aria-label="Page navigation">
                     <ul class="pagination">
-                      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+                        @if ($users->onFirstPage())
+                            <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                        @else
+                            <li class="page-item"><a class="page-link" href="{{ $users->previousPageUrl() }}">Anterior</a></li>
+                        @endif
+
+
+                        @for ($i = 1; $i <= $users->lastPage(); $i++)
+                            <li class="page-item {{ ($users->currentPage() == $i) ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $users->url($i) }}">{{ $i }}</a>
+                            </li>
+                        @endfor
+
+                        @if ($users->hasMorePages())
+                            <li class="page-item"><a class="page-link" href="{{ $users->nextPageUrl() }}">Próximo</a></li>
+                        @else
+                            <li class="page-item disabled"><span class="page-link">Next</span></li>
+                        @endif
                     </ul>
-                  </nav>
+                </nav>
             </section>
-
-
         </div>
     </section>
 @endsection

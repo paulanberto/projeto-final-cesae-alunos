@@ -73,18 +73,13 @@ i {
     background-color: white;
     color: #868686;
     transition: all 0.3s ease;
-
 }
 
 .delete-own-account:hover {
     background-color: #dc3545;
-    color: white;
     border-radius: inherit;
 }
 
-.users-browse:hover i {
-    color: white;
-}
 
 a {
     color: inherit;
@@ -99,13 +94,6 @@ a {
     font-size: 48px;
 }
 
-h2 {
-    color: #7426aa;
-}
-
-h5 {
-    color: #392465;
-}
 
 
 .posts-questions-button {
@@ -119,4 +107,28 @@ h5 {
     background-color: #7426aa;
     color: white;
     border-radius: inherit;
+}
+
+
+.users-browse:hover .fonteBold,
+.users-browse:hover .fontePrincipal,
+.users-browse:hover .card-text,
+.users-browse:hover i
+ {
+    color: white !important;
+}
+
+
+.delete-own-account:hover .fonteBold,
+.delete-own-account:hover .fontePrincipal,
+.delete-own-account:hover .card-text,
+.delete-own-account:hover .fa-trash
+  {
+    color: white !important;
+}
+
+.delete-own-account .fonteBold,
+.delete-own-account .fontePrincipal,
+.delete-own-account .card-text {
+    color: #868686 !important;
 }

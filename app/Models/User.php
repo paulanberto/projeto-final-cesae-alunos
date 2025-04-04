@@ -23,6 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'curso_id',
+        'saldo_pontos',
+        'user_type'
     ];
 
     /**
@@ -54,11 +56,13 @@ class User extends Authenticatable
         return $this->user_type == 2;
     }
 
-    public function curso() {
+    public function curso()
+    {
         return $this->belongsTo(Curso::class);
     }
-      
-    public function isModerador() {
+
+    public function isModerador()
+    {
         // Usando o user_type onde 1 identifica um moderador
         return $this->user_type == 1;
     }
