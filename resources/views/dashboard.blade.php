@@ -5,6 +5,9 @@
         <div class="card mb-12">
             <div class="row g-0 dashboard-card-area">
                 <div class="col-md-3 dashboard-img-and-button ">
+
+
+<!-- ================================== Alterar imagem de perfil ================= -->
                     <img class="img-profile-dashboard"
                         src="{{ file_exists(public_path('imagens/profile/' . Auth::id() . '/profile-' . Auth::id() . '.jpg'))
                             ? asset('imagens/profile/' . Auth::id() . '/profile-' . Auth::id() . '.jpg')
@@ -27,6 +30,9 @@
                             </p>
                         </form>
                     </div>
+
+<!-- ===================================================-->
+
                 </div>
                 <div class="col-md-9">
                     <div class="card-body">
