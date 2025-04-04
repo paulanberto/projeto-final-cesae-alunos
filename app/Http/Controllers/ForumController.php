@@ -58,7 +58,41 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'titulo' => 'required|string',
+            'texto' => 'required|string',
+            'categoria_id' => 'required | exists:categorias,id',
+            'post_type_id' => 'required | exists:tipo_post,id',
+        ]);
+
+        if($request->tags){
+            $request->validate([
+                'tags.*' => 'exists:tags,id'
+            ]);
+        }
+
+        $post = Post::create([
+            'user_id' => Auth::id(),
+            'categoria_id' => $request->categoria_id,
+            'post_type_id' => $request->post_type_id,
+            'titulo' => $request->titulo,
+            'texto' => $request->texto,
+        ]);
+
+        if ($request->post_type_id == 2) {
+            DB::table('users')->
+            where('id', Auth::id())->
+            increment('saldo_pontos', 2);
+        }
+
+        if($request->tags){
+            foreach ($request->tags as $tag) {
+                $post->tags()->attach(Tag::where('id', $tag)->pluck('id'));
+            };
+        }
+
+
+        return redirect()->route('forum.list', $request->categoria_id);
     }
 
     /**
@@ -123,6 +157,8 @@ class ForumController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::find($id);
+        Post::where('id', $id)->delete();
+        return redirect()->route('forum.list', $post->categoria->id);
     }
 }

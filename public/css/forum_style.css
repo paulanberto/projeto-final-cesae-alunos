@@ -94,6 +94,8 @@
         background-color: #ac8fc0;
         border-radius: 2px;
         border-color: #7426aa;
+        font-size:small;
+        padding: 6px;
     }
 
     .tagCheckButton:hover{
@@ -101,8 +103,5 @@
         border-color: #570492 !important;
     }
 
-    .active{
-        background-color: #7426aa !important;
-        border-color: #570492 !important;
-    }
+    --bs-btn-active-bg:#7426aa;
 }

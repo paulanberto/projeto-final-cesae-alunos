@@ -163,8 +163,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/post/{id}', [ForumController::class, 'show'])->name('forum.show');
 
         Route::post('/comment', [ForumController::class, 'comment'])->name('forum.comment');
+
         Route::get('/create/{id}', [ForumController::class, 'create'])->name('forum.create');
 
         Route::post('/store', [ForumController::class, 'store'])->name('forum.store');
+        Route::delete('/delete/{id}', [ForumController::class, 'destroy'])->name('forum.delete');
+
     });
 });
