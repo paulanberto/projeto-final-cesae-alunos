@@ -51,7 +51,7 @@
             </table>
 
             <section>
-                <nav id="pagination-nav"  aria-label="Page navigation">
+                <div id="pagination-nav"  aria-label="Page navigation">
                     <ul class="pagination">
 
                         @if ($users->onFirstPage())
@@ -73,7 +73,7 @@
                             <li class="page-item disabled"><span class="page-link">Next</span></li>
                         @endif
                     </ul>
-                </nav>
+                </div>
             </section>
         </div>
     </section>
