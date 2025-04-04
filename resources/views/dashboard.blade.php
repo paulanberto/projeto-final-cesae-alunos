@@ -5,15 +5,38 @@
         <div class="card mb-12">
             <div class="row g-0 dashboard-card-area">
                 <div class="col-md-3 dashboard-img-and-button ">
-                    <img class="img-profile-dashboard" src="../imagens/profile-icon.png" class="img-fluid rounded-start"
-                        alt="...">
+
+
+<!-- ================================== Alterar imagem de perfil ================= -->
+                    <img class="img-profile-dashboard"
+                        src="{{ file_exists(public_path('imagens/profile/' . Auth::id() . '/profile-' . Auth::id() . '.jpg'))
+                            ? asset('imagens/profile/' . Auth::id() . '/profile-' . Auth::id() . '.jpg')
+                            : (file_exists(public_path('imagens/profile/' . Auth::id() . '/profile-' . Auth::id() . '.png'))
+                                ? asset('imagens/profile/' . Auth::id() . '/profile-' . Auth::id() . '.png')
+                                : (file_exists(public_path('imagens/profile/' . Auth::id() . '/profile-' . Auth::id() . '.jpeg'))
+                                    ? asset('imagens/profile/' . Auth::id() . '/profile-' . Auth::id() . '.jpeg')
+                                    : (file_exists(public_path('imagens/profile/' . Auth::id() . '/profile-' . Auth::id() . '.gif'))
+                                        ? asset('imagens/profile/' . Auth::id() . '/profile-' . Auth::id() . '.gif')
+                                        : '../imagens/profile-icon.png'))) }}"
+                        class="img-fluid rounded-start" alt="Profile Image">
                     <div class="img-change-dashboard-button">
-                        <p><button class="botaoPrincipal rounded-pill px-3" type="button">Alterar Imagem</button></p>
+                        <form action="{{ route('update.profile.image') }}" method="POST" enctype="multipart/form-data"
+                            id="profileImageForm">
+                            @csrf
+                            <input type="file" name="profile_image" id="profileImageInput" style="display: none;"
+                                onchange="document.getElementById('profileImageForm').submit();">
+                            <p><button class="botaoPrincipal rounded-pill px-3" type="button"
+                                    onclick="document.getElementById('profileImageInput').click();">Alterar Imagem</button>
+                            </p>
+                        </form>
                     </div>
+
+<!-- ===================================================-->
+
                 </div>
                 <div class="col-md-9">
                     <div class="card-body">
-                        <h5 class="card-title ">
+                        <h3 class="fonteBold">
                             @switch(Auth::user()->user_type)
                                 @case(0)
                                     Aluno
@@ -26,23 +49,23 @@
                                 @case(2)
                                     Administrador
                                 @endswitch
-                                </h2>
-                                <ul>
-                                    @if (Auth::user()->user_type === 0)
-                                        <li>Nome: {{ Auth::user()->name }}</li>
-                                        @if (isset(Auth::user()->curso->nome))
-                                            <li>{{ Auth::user()->curso->nome }}</li>
-                                        @endif
-                                        @if (isset(Auth::user()->saldo_pontos))
-                                            <li>Pontos: {{ Auth::user()->saldo_pontos }}</li>
-                                        @endif
-                                    @elseif(Auth::user()->user_type === 1)
-                                        <li>Nome: {{ Auth::user()->name }}</li>
-                                    @elseif(Auth::user()->user_type === 2)
-                                        <li>Nome: {{ Auth::user()->name }}</li>
+                            </h3>
+                            <ul>
+                                @if (Auth::user()->user_type === 0)
+                                    <li class="fontePrincipal">{{ Auth::user()->name }}</li>
+                                    @if (isset(Auth::user()->curso->nome))
+                                        <li class="fontePrincipal">{{ Auth::user()->curso->nome }}</li>
                                     @endif
-                                </ul>
-                                <p class="card-text fontePrincipal"></p>
+                                    @if (isset(Auth::user()->saldo_pontos))
+                                        <li class="fontePrincipal">Pontos: {{ Auth::user()->saldo_pontos }}</li>
+                                    @endif
+                                @elseif(Auth::user()->user_type === 1)
+                                    <li class="fontePrincipal">{{ Auth::user()->name }}</li>
+                                @elseif(Auth::user()->user_type === 2)
+                                    <li class="fontePrincipal">{{ Auth::user()->name }}</li>
+                                @endif
+                            </ul>
+                            <p class="fontePrincipal"></p>
                         </div>
                     </div>
                 </div>
@@ -59,8 +82,9 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="card-body">
-                                    <h5 class="fonteBold">Consultar lista de Utilizadores</h5>
-                                    <p class="card-text fontePrincipal">Aqui pode consultar e fazer alterações relativas a todos os
+                                    <h3 class="fonteBold">Consultar lista de Utilizadores</h3>
+                                    <p class="card-text fontePrincipal">Aqui pode consultar e fazer alterações relativas a todos
+                                        os
                                         utilizadores.
                                     </p>
                                 </div>
@@ -72,92 +96,46 @@
 
             <div class="empty-space"></div>
 
-
-            {{-- Area para contribuiçoes feitas por este utilizador --}}
-
-
-            <section class="posts-questions-section">
-                @auth
-                    @if (Auth::user()->user_type === 0)
-                        <div class="card mb-12">
-                            <a class="posts-questions-button" href="">
-                                <div class="row g-0 dashboard-card-area">
-                                    <!-- Icon column (1/6) -->
-                                    <div class="col-2 dashboard-img-and-button d-flex align-items-center justify-content-center">
-                                        <i class="fa-solid fa-comments"></i>
-                                    </div>
-
-
-
-                                    <div class="col-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Posts</h5>
-                                            <p class="card-text fonteprincipal">Consultar histórico de Posts.</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-2 d-flex align-items-center justify-content-center">
-                                        <p class="card-text m-0 fw-bold">
-                                           0 {{-- {{ $ }} --}}
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="empty-space"></div>
-
-                        <div class="card mb-12">
-                            <a class="posts-questions-button" href="">
-                                <div class="row g-0 dashboard-card-area">
-
-                                    <div class="col-2 dashboard-img-and-button d-flex align-items-center justify-content-center">
-                                        <i class="fa-solid fa-question"></i>
-                                    </div>
-
-
-                                    <div class="col-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Questões</h5>
-                                            <p class="card-text">Consultar histórico Questões.</p>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-2 d-flex align-items-center justify-content-center">
-                                        <p class="card-text m-0 fw-bold">
-                                           0 {{-- {{ $ }} --}}
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    @endif
-                @endauth
-
-            </section>
-
-
-
-            <div class="empty-space"></div>
-
             @auth
                 @if (Auth::user()->user_type === 0)
                     <div class="card mb-12">
-                        <a class="delete-own-account" href="">
+                        <a href="#" class="delete-own-account" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
                             <div class="row g-0 dashboard-card-area">
-                                <div class="col-md-3 dashboard-img-and-button ">
+                                <div class="col-md-3 dashboard-img-and-button">
                                     <i class="fa-solid fa-trash"></i>
                                 </div>
                                 <div class="col-md-9">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Apagar Conta</h5>
-                                        <p class="card-text">Aqui pode apagar a sua conta do nosso sistema.
-                                        </p>
+                                    <div class="card-body" id="delete-own-account-text">
+                                        <h3 class="fonteBold">Apagar Conta</h3>
+                                        <p class="card-text fontePrincipal">Aqui pode apagar a sua conta do nosso sistema.</p>
                                     </div>
                                 </div>
                             </div>
                         </a>
+                    </div>
+
+                    <!-- ==================================Modal de confirmacao para apagar conta================= -->
+                    <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title" id="deleteAccountModalLabel">Confirmar Exclusão da Conta</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="fontePrincipal">Tem certeza que deseja apagar sua conta? Esta acção não é reversivel.</p>
+                                    <p class="fontePrincipal">Todos os seus dados, incluindo posts e questões, serão permanentemente removidos.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="botaoPrincipal rounded-pill px-3" data-bs-dismiss="modal">Cancelar</button>
+                                    <form action="{{ route('account.delete') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger rounded-pill px-3">Apagar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 @endif
             @endauth

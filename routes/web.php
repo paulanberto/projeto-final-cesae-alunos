@@ -100,9 +100,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{id}/delete', [UserController::class, 'deleteUserFromDB'])->name('users.delete');
 
 
-    Route::get('/dashboard', action: [DashboardController::class, 'getDashboard'])->name('dashboard.view')->middleware(['auth', 'verified']);;
-
-
+    Route::get('/dashboard', action: [DashboardController::class, 'getDashboard'])->name('dashboard.view');
+    Route::post('/update-profile-image', [DashboardController::class, 'updateProfileImage'])->name('update.profile.image');
+    Route::post('/user-delete', [DashboardController::class, 'deleteOwnAccount'])->name('account.delete');
 
 
     Route::prefix('tema')->group(function () {
@@ -163,8 +163,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/post/{id}', [ForumController::class, 'show'])->name('forum.show');
 
         Route::post('/comment', [ForumController::class, 'comment'])->name('forum.comment');
+
         Route::get('/create/{id}', [ForumController::class, 'create'])->name('forum.create');
 
         Route::post('/store', [ForumController::class, 'store'])->name('forum.store');
+        Route::delete('/delete/{id}', [ForumController::class, 'destroy'])->name('forum.delete');
+
     });
 });

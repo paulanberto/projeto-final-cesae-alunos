@@ -6,8 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">Alterar dados de ""</h5>
-                    <a href="{{ route('users.view') }}" class="btn btn-secondary">Voltar</a>
+                    <h5 class="card-title">{{$user->name }}</h5>
                 </div>
                 <div class="card-body">
                     @if ($errors->any())
@@ -38,7 +37,7 @@
                         <div class="form-group mb-3">
                             <label for="curso_id">Curso</label>
                             <select class="form-control" id="curso_id" name="curso_id">
-                                <option value="">No Course</option>
+                                <option value="">Sem Curso</option>
                                 @foreach ($cursos as $curso)
                                     <option value="{{ $curso->id }}"
                                             {{ old('curso_id', $user->curso_id) == $curso->id ? 'selected' : '' }}>
@@ -46,6 +45,12 @@
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="saldo_pontos">Pontos</label>
+                            <input type="number" class="form-control" id="saldo_pontos" name="saldo_pontos"
+                                   value="{{ old('saldo_pontos', $user->saldo_pontos) }}" required min="0">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Guardar</button>

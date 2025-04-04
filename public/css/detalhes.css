@@ -1,0 +1,13 @@
+
+@font-face {
+    font-family: 'ChakraPetch-Light';
+    src: url("../fontes/ChakraPetch-Light.ttf") format('truetype');
+    font-weight: normal;
+}
+
+.fonteEscura{
+    color: #290244;
+    font-weight: 650;
+    font-family: 'ChakraPetch-Light', sans-serif;
+}
+

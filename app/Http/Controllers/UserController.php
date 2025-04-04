@@ -118,20 +118,26 @@ class UserController extends Controller
             ->leftJoin('cursos', 'users.curso_id', '=', 'cursos.id')
             ->select('users.*', 'cursos.nome as curso_nome');
 
-        // Apply search if provided
+
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('users.name', 'like', "%{$search}%")
                     ->orWhere('users.email', 'like', "%{$search}%");
 
-                // Only include curso search if the table exists
+
                 if (Schema::hasTable('cursos')) {
                     $q->orWhere('cursos.nome', 'like', "%{$search}%");
                 }
             });
         }
 
-        $users = $query->get();
+
+        $users = $query->paginate(15);
+
+
+        if ($search) {
+            $users->appends(['search' => $search]);
+        }
 
         return view('user.view_users', compact('users'));
     }
@@ -147,7 +153,7 @@ class UserController extends Controller
             ->first();
 
         if (!$user) {
-            return redirect()->route('users.view')->with('error', 'User not found.');
+            return redirect()->route('users.view')->with('error', 'Utilizadores não disponiveis.');
         }
 
         return view('user.view_user', compact('user'));
@@ -172,43 +178,45 @@ class UserController extends Controller
     }
 
     public function updateUser(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
+{
+    $user = User::findOrFail($id);
 
-        $validator = Validator::make($request->all(), [
-            'curso' => 'required|string|max:255',
-            'ano' => 'required|integer|digits:4',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|regex:/@msft\.cesae\.pt$/|unique:users,email,' . $id,
+    $validator = Validator::make($request->all(), [
+        'curso_id' => 'required|exists:cursos,id',
+        'ano' => 'required|integer|digits:4',
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|regex:/@msft\.cesae\.pt$/|unique:users,email,' . $id,
+        'saldo_pontos' => 'required|integer|min:0', // Validate points
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+
+    try {
+        $user->update([
+            'curso_id' => $request->curso_id,
+                'ano' => $request->ano,
+            'name' => $request->name,
+            'email' => $request->email,
+            'saldo_pontos' => $request->saldo_pontos, // Update points
         ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        try {
-            $user->update([
-                'curso' => $request->curso,
-                'ano' => $request->ano,
-                'name' => $request->name,
-                'email' => $request->email,
+        // If a new password is provided, update it
+        if ($request->filled('password')) {
+            $request->validate([
+                'password' => 'string|confirmed|min:8',
             ]);
-
-            // Se uma nova senha for fornecida, atualize-a
-            if ($request->filled('password')) {
-                $request->validate([
-                    'password' => 'string|confirmed|min:8',
-                ]);
-                $user->update([
-                    'password' => Hash::make($request->password),
-                ]);
-            }
-
-            return redirect()->route('users.list')->with('success', 'Usuário atualizado com sucesso.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Ocorreu um erro ao atualizar o usuário: ' . $e->getMessage())->withInput();
+            $user->update([
+                'password' => Hash::make($request->password),
+            ]);
         }
+
+        return redirect()->route('users.view.single', $id)->with('success', 'Usuário atualizado com sucesso.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Ocorreu um erro ao atualizar o usuário: ' . $e->getMessage())->withInput();
     }
+}
 
     public function deleteUserFromDB($id)
     {

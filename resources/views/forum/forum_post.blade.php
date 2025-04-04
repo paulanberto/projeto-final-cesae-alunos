@@ -2,12 +2,11 @@
 <link rel="stylesheet" href="{{asset('css/forum_style.css')}}">
 
 @section('title')
-    Forum {{-- - {{$post->titulo}} --}}
+    Forum - {{$post->titulo}}
 @endsection
 
 
 @section('content')
-    {{-- {{dd($post->children)}} --}}
 
     <div class="container my-5 fontePrincipal col-lg-6">
         <div class="row">
@@ -15,13 +14,21 @@
                 <h3 class="fonteBold"> {{$post->titulo}} </h3>
                 <p> {{$post->texto}} </p>
                 <span class="postAutor">
-                    por {{$post->user->name}} ({{$post->user->curso->nome}} {{$post->user->curso->edicao}}) <br>
+                    por {{$post->user->name}}
+                        @if ($post->user->curso)
+                            ({{$post->user->curso->nome}} {{$post->user->curso->edicao}})
+                        @endif
+                         <br>
                         {{$post->created_at}}
                 </span>
             </div>
-            @if (Auth::check() && (Auth::user()->isAdmin() || Auth::user()->isModerador()))
+            @if ((Auth::check() && (Auth::user()->isAdmin() || Auth::user()->isModerador())) || Auth::user()->id == $post->user_id )
                 <div class="col-1">
-                    <p><button class="btn btn-danger rounded-pill px-3" type="button">Excluir post</button></p>
+                    <form action="{{route('forum.delete', $post->id)}}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <p><button type="submit" class="btn btn-danger rounded-pill px-3">Excluir post</button></p>
+                    </form>
                 </div>
             @endif
         </div>
@@ -38,9 +45,14 @@
                             <h4> {{$comment->user->name}} </h4>
                             <p> {{$comment->texto}} </p>
                         </div>
-                        @if (Auth::check() && (Auth::user()->isAdmin() || Auth::user()->isModerador()))
+                        @if ((Auth::check() && (Auth::user()->isAdmin() || Auth::user()->isModerador()))|| Auth::user()->id == $post->user_id)
                             <div class="col-1">
-                                <p><button class="btn btn-danger rounded-pill px-3" type="button">Excluir comentário</button></p>
+                                <form action="{{route('forum.delete', $comment->id)}}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <p><button type="submit" class="btn btn-danger rounded-pill px-3">Excluir comentário</button></p>
+                                </form>
+
                             </div>
                         @endif
                     </div>
