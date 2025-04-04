@@ -28,6 +28,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'curso_id',
         'ano',
+        'saldo_pontos',
+        'user_type'
     ];
 
     /**
@@ -58,6 +60,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function curso()
+
     {
         return $this->belongsTo(Curso::class);
     }
