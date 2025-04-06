@@ -152,6 +152,7 @@ class UserController extends Controller
             ->where('users.id', $id)
             ->first();
 
+
         if (!$user) {
             return redirect()->route('users.view')->with('error', 'Utilizadores não disponiveis.');
         }
@@ -170,53 +171,63 @@ class UserController extends Controller
             $anos[] = $anoAtual + $i;
         }
 
+        $user_types = [
+            (object) ['id' => 0, 'nome' => 'Aluno'],
+            (object) ['id' => 1, 'nome' => 'Moderador'],
+            (object) ['id' => 2, 'nome' => 'Administrador']
+        ];
+
         if (!$user) {
             return redirect()->route('users.view')->with('error', 'User not found.');
         }
 
-        return view('user.edit_user', compact('user', 'cursos', 'anos'));
+        return view('user.edit_user', compact('user', 'cursos', 'anos', 'user_types'));
     }
 
     public function updateUser(Request $request, $id)
-{
-    $user = User::findOrFail($id);
+    {
 
-    $validator = Validator::make($request->all(), [
-        'curso_id' => 'required|exists:cursos,id',
-        'ano' => 'required|integer|digits:4',
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|regex:/@msft\.cesae\.pt$/|unique:users,email,' . $id,
-        'saldo_pontos' => 'required|integer|min:0', // Validate points
-    ]);
+        $user = User::findOrFail($id);
 
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
-    }
+        $validator = Validator::make($request->all(), [
+            'curso_id' => 'required|exists:cursos,id',
+            'ano' => 'required|integer|digits:4',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|regex:/@msft\.cesae\.pt$/|unique:users,email,' . $id,
+            'saldo_pontos' => 'required|integer|min:0',
+            'user_type' => 'required|integer|in:0,1,2',
 
-    try {
-        $user->update([
-            'curso_id' => $request->curso_id,
-                'ano' => $request->ano,
-            'name' => $request->name,
-            'email' => $request->email,
-            'saldo_pontos' => $request->saldo_pontos, // Update points
         ]);
 
-        // If a new password is provided, update it
-        if ($request->filled('password')) {
-            $request->validate([
-                'password' => 'string|confirmed|min:8',
-            ]);
-            $user->update([
-                'password' => Hash::make($request->password),
-            ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        return redirect()->route('users.view.single', $id)->with('success', 'Usuário atualizado com sucesso.');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Ocorreu um erro ao atualizar o usuário: ' . $e->getMessage())->withInput();
+        try {
+            $user->update([
+                'curso_id' => $request->curso_id,
+                'ano' => $request->ano,
+                'name' => $request->name,
+                'email' => $request->email,
+                'saldo_pontos' => $request->saldo_pontos,
+                'user_type' => $request->user_type
+            ]);
+
+            // If a new password is provided, update it
+            if ($request->filled('password')) {
+                $request->validate([
+                    'password' => 'string|confirmed|min:8',
+                ]);
+                $user->update([
+                    'password' => Hash::make($request->password),
+                ]);
+            }
+
+            return redirect()->route('users.view.single', $id)->with('success', 'Usuário atualizado com sucesso.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Ocorreu um erro ao atualizar o usuário: ' . $e->getMessage())->withInput();
+        }
     }
-}
 
     public function deleteUserFromDB($id)
     {

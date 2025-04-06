@@ -1,7 +1,7 @@
 @extends('layouts.fo_layout')
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/viewusers.css') }}">
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/viewusers.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 
 
@@ -10,7 +10,8 @@
             <h2 class="m-0 fontePrincipal">Area Utilizadores</h2>
             <form class="search-form d-flex">
                 <div class="input-group">
-                    <input type="text" class="form-control search-input" name="search" placeholder="Pesquisar utilizadores..." value="{{ request()->query('search') }}">
+                    <input type="text" class="form-control search-input" name="search"
+                        placeholder="Pesquisar utilizadores..." value="{{ request()->query('search') }}">
                     <button type="submit" class="btn btn-primary search-button">
                         <i class="fa fa-search"></i> Pesquisar
                     </button>
@@ -25,6 +26,7 @@
                         <th scope="col">Nome</th>
                         <th scope="col">Email</th>
                         <th scope="col">Curso</th>
+                        <th scope="col">Tipo</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -43,26 +45,36 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('users.view.single', $user->id) }}" class="botaoPrincipal rounded-pill px-3">ver</a>
+                                @if ($user->user_type == 0)
+                                    Aluno
+                                @elseif ($user->user_type == 1)
+                                    Moderador
+                                @elseif ($user->user_type == 2)
+                                    Admin
+                                @endif
+                            <td>
+                                <a href="{{ route('users.view.single', $user->id) }}"
+                                    class="botaoPrincipal rounded-pill px-3">ver</a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
 
-            <section>
-                <div id="pagination-nav"  aria-label="Page navigation">
-                    <ul class="pagination">
+            <section class="pagination-section">
+                <div id="pagination-nav" aria-label="Page navigation">
+                    <ul class="pagination fontePrincipal">
 
                         @if ($users->onFirstPage())
                             <li class="page-item disabled"><span class="page-link">Previous</span></li>
                         @else
-                            <li class="page-item"><a class="page-link" href="{{ $users->previousPageUrl() }}">Anterior</a></li>
+                            <li class="page-item"><a class="page-link" href="{{ $users->previousPageUrl() }}">Anterior</a>
+                            </li>
                         @endif
 
 
                         @for ($i = 1; $i <= $users->lastPage(); $i++)
-                            <li class="page-item {{ ($users->currentPage() == $i) ? 'active' : '' }}">
+                            <li class="page-item {{ $users->currentPage() == $i ? 'active' : '' }}">
                                 <a class="page-link" href="{{ $users->url($i) }}">{{ $i }}</a>
                             </li>
                         @endfor
