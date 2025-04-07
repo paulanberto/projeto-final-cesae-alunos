@@ -22,6 +22,8 @@ class UserSeeder extends Seeder
             'password' => Hash::make('admin@msft.cesae.pt'),
             'user_type' => '2',
             'email_verified_at' => '2025-04-04 09:23:46',
+            'curso_id' => '1',
+            'ano' => null,
         ],
         [
             'name' => 'Sara Monteiro',
@@ -29,13 +31,17 @@ class UserSeeder extends Seeder
             'password' => Hash::make('moderador@msft.cesae.pt'),
             'user_type' => '1',
             'email_verified_at' => '2025-04-04 09:23:46',
+            'curso_id' => '1',
+            'ano' => null,
         ],
         [
             'name' => 'Bruno Balmant',
             'email' => 'bruno.pessamilio.prt_a@msft.cesae.pt',
             'password' => Hash::make('@pass1234'),
-            'user_type' => '2',
+            'user_type' => '1',
             'email_verified_at' => '2025-04-04 09:23:46',
+            'curso_id' => '2',
+            'ano' => '2024',
         ],
     ]);
     }

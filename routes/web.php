@@ -167,7 +167,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/create/{id}', [ForumController::class, 'create'])->name('forum.create');
 
         Route::post('/store', [ForumController::class, 'store'])->name('forum.store');
+
         Route::delete('/delete/{id}', [ForumController::class, 'destroy'])->name('forum.delete');
+
+        Route::get('/edit/{id}', [ForumController::class, 'edit'])->name('forum.edit');
+
+        Route::post('/update/{id}', [ForumController::class, 'update'])->name('forum.update');
 
     });
 });

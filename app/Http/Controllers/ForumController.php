@@ -141,7 +141,9 @@ class ForumController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::where('id', $id)->first();
+        $allTags = Tag::all();
+        return view('forum.forum_edit', compact('post', 'allTags'));
     }
 
     /**
@@ -149,7 +151,7 @@ class ForumController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd($request);
     }
 
     /**
