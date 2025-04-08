@@ -11,7 +11,7 @@
 <div class="col-12 col-lg-8">
     <h1 class="fonteBold forumTitle">Editar dúvida/discussão</h1>
     <div class="createPostForm">
-        <form action="{{route('forum.update', $post->id)}}" method="POST">
+        <form action="{{route('forum.update')}}" method="POST">
             @csrf
             <div class="row g-2 mb-3">
                 <label for="inputTitulo" class="form-label fontePrincipal">Título</label>
@@ -62,6 +62,7 @@
                 @enderror
             </div>
             <input hidden type="text" name="categoria_id" value="{{$post->categoria_id}}">
+            <input hidden type="text" name="id" value="{{$post->id}}">
             <button type="submit" class="botaoPrincipal rounded-pill px-3">Submit</button>
         </form>
     </div>

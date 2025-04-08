@@ -1,3 +1,8 @@
+.forumTitle{
+    margin: 15px;
+    margin-bottom: 6%;
+    margin-top: 4%;
+}
 
 .categoriaCard{
     margin-bottom: 2rem;
@@ -20,9 +25,12 @@
     text-align: end;
 }
 
-.forumTitle{
-    margin: 15px;
-    margin-bottom: 6%;
+.newPostButton{
+    text-decoration: none !important;
+}
+
+.newPostButtonText{
+    margin: auto;
 }
 
 .newPostCard:hover{

@@ -172,7 +172,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/edit/{id}', [ForumController::class, 'edit'])->name('forum.edit');
 
-        Route::post('/update/{id}', [ForumController::class, 'update'])->name('forum.update');
+        Route::post('/update', [ForumController::class, 'update'])->name('forum.update');
 
     });
 });

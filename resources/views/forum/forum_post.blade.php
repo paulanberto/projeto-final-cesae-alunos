@@ -56,12 +56,12 @@
                 <p> sem comentários</p>
             @else
                 <h3>Comentários</h3>
-                @foreach ($post->children as $comment)
+                @foreach ($post->children->sortByDesc('created_at') as $comment)
                     <div class="row comentarioRow">
                         <div class="comentario col-12 px-5">
                             <h4> {{$comment->user->name}}  <span>
                                 @if ($comment->user->curso)
-                                    ({{$comment->user->curso->nome}} {{$comment->user->ano}})
+                                    ({{$comment->user->curso->nome}}{{$comment->user->ano}})
                                 @endif</span> </h4>
                             <p> {{$comment->texto}} </p>
                         </div>
