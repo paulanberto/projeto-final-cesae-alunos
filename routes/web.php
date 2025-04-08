@@ -19,7 +19,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/tema');
 });
 
 //Rota de fallback para páginas não encontradas
@@ -168,6 +168,5 @@ Route::middleware('auth')->group(function () {
 
         Route::post('/store', [ForumController::class, 'store'])->name('forum.store');
         Route::delete('/delete/{id}', [ForumController::class, 'destroy'])->name('forum.delete');
-
     });
 });
