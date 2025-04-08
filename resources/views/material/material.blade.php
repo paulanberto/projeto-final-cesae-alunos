@@ -21,12 +21,10 @@
         </div>
     @endif
 
-
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="fonteBold mt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Bibendum amet at molestie mattis.</h1>
+        <hr>
         @if (Auth::check() && (Auth::user()->isAdmin() || Auth::user()->isModerador()))
-            <button id= "botaoSelecionar" class="botaoPrincipal rounded-pill px-3" type="button">selecionar</button>
+            <button id= "botaoSelecionar" class="botaoPrincipal rounded-pill px-3 mt-5" type="button">selecionar</button>
         @endif
     </div>
     <h1 class="fonteBold mt-5">{{ $categoria->nome ?? 'Materiais' }}</h1>
@@ -52,7 +50,7 @@
         <form id="deleteForm" action="{{ route('material.deleteMultiple') }}" method="POST">
             @method('DELETE')
             @csrf
-
+            <input hidden type="text" name="categoria_id" value="{{ $categoria->id }}">
             @foreach ($material as $materiais)
                 @if ($materiais->post_type_id == 1)
                     <div class="card mb-3">

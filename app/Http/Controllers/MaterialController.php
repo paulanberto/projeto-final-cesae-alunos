@@ -3,29 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class MaterialController extends Controller
 {
-    public function index()
-    {
-        $material = $this->getAllMaterialFromDB();
-        return view('material.material', compact('material'));
-    }
 
     public function showMaterial(string $id){
-        $categoria = DB::table('categorias')
-        ->where('id', $id)
-        ->first();
-
+        $categoria = Categoria::where('id', $id)->first();
 
         $material = DB::table('posts')
         ->join('users', 'posts.user_id', '=', 'users.id')
         ->join('categorias', 'posts.categoria_id', '=', 'categorias.id')
         ->where('posts.categoria_id', $id)
         ->select('posts.*', 'users.name as user_name')
+        ->orderBy('posts.created_at', 'desc')
         ->get();
 
         return view('material.material', compact('categoria', 'material', 'id'));
@@ -184,14 +178,14 @@ class MaterialController extends Controller
                     ->delete();
             }
 
-            return redirect()->route('material')->with('success', 'Materiais excluídos com sucesso');
+            return redirect()->route('material.show', $request->categoria_id)->with('success', 'Materiais excluídos com sucesso');
         }
 
         else if($request->has('id')) {
             DB::table('posts')
                 ->where('id', $request->id)
                 ->delete();
-            return redirect()->route('material')->with('success', 'Material excluído com sucesso');
+            return redirect()->route('material.show', $request->categoria_id)->with('success', 'Material excluído com sucesso');
         }
     }
 }

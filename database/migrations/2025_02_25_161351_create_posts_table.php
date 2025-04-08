@@ -20,8 +20,8 @@ return new class extends Migration
             $table->text('texto')->nullable();
             $table->string('ficheiro')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('categoria_id')->references('id')->on('categorias');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
             $table->foreign('post_type_id')->references('id')->on('tipo_post');
         });
     }
