@@ -22,7 +22,7 @@
 
             @if (session('status'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('status') }}
+                    Email para redefinição enviado com sucesso!
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -38,7 +38,7 @@
                         placeholder="email@msft.cesae.pt" required pattern="^[a-zA-Z0-9._%+-]+@msft\.cesae\.pt$"
                         value="{{ old('email') }}">
                     @error('email')
-                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                        <div class="alert alert-danger mt-2">Já enviamos um email para redefinição</div>
                     @enderror
                     <small class="form-text text-muted mt-2">Enviaremos um link para redefinir sua senha para o email
                         registado.</small>
