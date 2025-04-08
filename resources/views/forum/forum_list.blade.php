@@ -12,7 +12,7 @@
     <div class="container">
         <h1 class="fonteBold forumTitle"> {{$categoria->nome}} </h1>
 
-        <a href="{{route('forum.create', $categoria->id)}}">
+        <a href="{{route('forum.create', $categoria->id)}}" class="newPostButton">
             <div class="card newPostCard mb-3">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
@@ -22,7 +22,7 @@
                                 </button>
                         </div>
                         <div>
-                            <h5 class="fonteBold">Nova dúvida ou discussão</h5>
+                            <h5 class="fonteBold newPostButtonText">Nova dúvida ou discussão</h5>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,31 @@
             @endforeach
             </tbody>
         </table>
+        <section>
+            <div id="pagination-nav"  aria-label="Page navigation">
+                <ul class="pagination">
 
+
+                    <li class="page-item @if ($posts->onFirstPage()) disabled @endif">
+                        <a class="page-link" href="{{ $posts->previousPageUrl() }}" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    @for ($i = 1; $i <= $posts->lastPage(); $i++)
+                        <li class="page-item {{ ($posts->currentPage() == $i) ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $posts->url($i) }}">{{ $i }}</a>
+                        </li>
+                    @endfor
+
+                    <li class="page-item @if (!$posts->hasMorePages()) disabled @endif">
+                        <a class="page-link" href="{{ $posts->nextPageUrl() }}" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
     </div>
 
 @endsection

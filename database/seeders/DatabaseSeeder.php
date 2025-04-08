@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+
 
         /* User::factory()->create([
             'name' => 'Test User',
@@ -35,7 +35,10 @@ class DatabaseSeeder extends Seeder
             PostTypeSeeder::class,
         ]);
 
+        User::factory(150)->create();
+
         Post::factory(100)->create();
+        Post::factory(100)->comment()->create();
 
         foreach( Post::all() as $post ) {
             $tags = Tag::inRandomOrder()->take(rand(1,5))->pluck('id');

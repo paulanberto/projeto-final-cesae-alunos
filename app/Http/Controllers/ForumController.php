@@ -32,13 +32,15 @@ class ForumController extends Controller
         ->where('id', $id)
         ->first();
         // acessar posts da categoria pelo id
-        $posts = Post::where('categoria_id', $id)
+        $query = Post::where('categoria_id', $id)
         ->where(function (Builder $query) {
             $query->where('post_type_id', '2')
                 ->orWhere('post_type_id', '3');
         })
         ->orderBy('created_at', 'desc')
-        ->get();
+        /* ->get() */;
+
+        $posts = $query->paginate(15);
 
 
         return view('forum.forum_list', compact('posts', 'categoria'));
@@ -141,15 +143,47 @@ class ForumController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::where('id', $id)->first();
+        $allTags = Tag::all();
+        return view('forum.forum_edit', compact('post', 'allTags'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        /* dd($request); */
+        $request->validate([
+            'titulo' => 'required | string',
+            'post_type_id' => 'required | int | between:2,3',
+            'texto' => 'required | string',
+            'id' => 'required | exists:posts,id',
+        ]);
+
+        if($request->tags){
+            $request->validate([
+                'tags.*' => 'exists:tags,id'
+            ]);
+        }
+
+        Post::where('id', $request->id)->update([
+            'titulo' => $request->titulo,
+            'post_type_id' => $request->post_type_id,
+            'texto' => $request->texto,
+        ]);
+
+        DB::table('post_tag')->where('post_id', $request->id)->delete();
+
+        if($request->tags){
+            $post = Post::where('id', $request->id)->first();
+            foreach ($request->tags as $tag) {
+                $post->tags()->attach(Tag::where('id', $tag)->pluck('id'));
+            };
+        }
+
+        return redirect()->route('forum.list', $request->categoria_id);
+
     }
 
     /**
