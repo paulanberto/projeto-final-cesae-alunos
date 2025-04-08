@@ -57,6 +57,33 @@
     }
   }
 
+.pagination .page-link {
+    color: #7426aa;
+    border-color: #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #7426aa;
+    color: white;
+    border-color:#7426aa;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #a0aec0;
+}
+
+.pagination .page-link:hover {
+    background-color: #f8f9fa;
+    color: #5e1e8a;
+    border-color: #e2e8f0;
+}
+
+#pagination-nav {
+    display: flex;
+    justify-content: center;
+}
+
 .postAutor{
     justify-self: end;
     font-size: smaller;
