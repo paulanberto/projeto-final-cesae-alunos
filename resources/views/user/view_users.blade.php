@@ -66,7 +66,7 @@
                     <ul class="pagination fontePrincipal">
 
                         @if ($users->onFirstPage())
-                            <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                            <li class="page-item disabled"><span class="page-link">Anterior</span></li>
                         @else
                             <li class="page-item"><a class="page-link" href="{{ $users->previousPageUrl() }}">Anterior</a>
                             </li>
