@@ -1,3 +1,9 @@
+.pagination-section{
+   justify-items: center;
+   margin: 32px;
+}
+
+
 .search-form {
     max-width: 400px;
     width: 100%;
@@ -33,6 +39,36 @@
     margin: 40px;
 }
 
-#pagination-nav{
-    background-color: none !important;
+
+a {
+    text-decoration: none;
 }
+
+
+.pagination .page-link {
+    color: #7426aa;
+    border-color: #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #7426aa;
+    color: white;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #a0aec0;
+}
+
+.pagination .page-link:hover {
+    background-color: #f8f9fa;
+    color: #5e1e8a;
+    border-color: #e2e8f0;
+}
+
+#pagination-nav {
+    display: flex;
+    justify-content: center;
+}
+
+

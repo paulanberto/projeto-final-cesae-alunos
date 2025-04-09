@@ -152,6 +152,7 @@ class UserController extends Controller
             ->where('users.id', $id)
             ->first();
 
+
         if (!$user) {
             return redirect()->route('users.view')->with('error', 'Utilizadores não disponiveis.');
         }
@@ -170,15 +171,23 @@ class UserController extends Controller
             $anos[] = $anoAtual + $i;
         }
 
+        $user_types = [
+            (object) ['id' => 0, 'nome' => 'Aluno'],
+            (object) ['id' => 1, 'nome' => 'Moderador'],
+            (object) ['id' => 2, 'nome' => 'Administrador']
+        ];
+
         if (!$user) {
             return redirect()->route('users.view')->with('error', 'User not found.');
         }
 
-        return view('user.edit_user', compact('user', 'cursos', 'anos'));
+        return view('user.edit_user', compact('user', 'cursos', 'anos', 'user_types'));
     }
 
     public function updateUser(Request $request, $id)
     {
+
+
         $user = User::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
@@ -186,7 +195,12 @@ class UserController extends Controller
             'ano' => 'required|integer|digits:4',
             'name' => 'required|string|max:255',
             'email' => 'required|email|regex:/@msft\.cesae\.pt$/|unique:users,email,' . $id,
-            'saldo_pontos' => 'required|integer|min:0', // Validate points
+            'saldo_pontos' => 'required|integer|min:0',
+            'user_type' => 'required|integer|in:0,1,2',
+
+
+        
+
         ]);
 
         if ($validator->fails()) {
@@ -199,7 +213,11 @@ class UserController extends Controller
                 'ano' => $request->ano,
                 'name' => $request->name,
                 'email' => $request->email,
-                'saldo_pontos' => $request->saldo_pontos, // Update points
+
+                'saldo_pontos' => $request->saldo_pontos,
+                'user_type' => $request->user_type
+
+
             ]);
 
             // If a new password is provided, update it

@@ -1,0 +1,28 @@
+.user-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+.user-container .row {
+    width: 100%;
+    max-width: 560px;
+}
+
+.user-container .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+
+.user-container .card-header {
+    background-color: #7426aa;
+    border-bottom: 1px solid #7426aa;
+
+}
+
+.user-container .card-header .fonteBold {
+    color: white;
+    margin-bottom: 0;
+}
