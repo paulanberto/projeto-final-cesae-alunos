@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{{asset('css/forum_style.css')}}">
 
 @section('title')
-    Forum {{-- - {{$categoria}} --}}
+    Fórum {{-- - {{$categoria}} --}}
 @endsection
 
 

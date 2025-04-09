@@ -7,7 +7,7 @@
 
     <section class="table-section">
         <div class="table-title d-flex justify-content-between align-items-center mb-4">
-            <h2 class="m-0 fontePrincipal">Area Utilizadores</h2>
+            <h2 class="m-0 fonteBold userTitle">Area Utilizadores</h2>
             <form class="search-form d-flex">
                 <div class="input-group">
                     <input type="text" class="form-control search-input" name="search"

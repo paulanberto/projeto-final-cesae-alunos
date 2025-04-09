@@ -2,12 +2,12 @@
 <link rel="stylesheet" href="{{asset('css/forum_style.css')}}">
 
 @section('title')
-    Forum
+    Fórum
 @endsection
 {{-- {{dd($categorias)}} --}}
 @section('content')
     <div class="forumTitle">
-        <h1 class="fontePrincipal">Forum Cesae Alunos</h1>
+        <h1 class="fonteBold">Fórum Cesae Alunos</h1>
     </div>
 
     @foreach ($categorias as $categoria )
