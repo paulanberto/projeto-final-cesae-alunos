@@ -16,6 +16,12 @@ nav {
     font-size: 20px;
 }
 
+.user:hover {
+    color: #c5a0e0!important;
+    transition: color 0.3s ease; 
+}
+
+
 
 
 .botaoPrincipal{

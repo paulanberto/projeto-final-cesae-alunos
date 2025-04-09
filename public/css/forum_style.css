@@ -2,6 +2,8 @@
     margin: 15px;
     margin-bottom: 6%;
     margin-top: 4%;
+    margin-top: 60px;
+    margin-left: 2px;
 }
 
 .categoriaCard{
@@ -98,6 +100,22 @@
     padding-left: 3%;
     border-radius: 15px;
     box-shadow: 10px 10px 5px #9750ca;
+}
+
+.form-container {
+    background-color: rgb(255, 255, 255)!important;
+    border-color: #7426aa;
+    border-width: 1px;
+    border-style: solid;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.createPostForm {
+    width: 100%;
 }
 
 .secaoComentarios{

@@ -30,31 +30,32 @@
         @csrf
         <div class="row mt-5">
             @foreach ($tema as $temas)
-            @if (!$temas->exclusivoForum)
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body d-flex flex-column">
-                            <div class="row g-0 flex-grow-1">
-                                <div class="form-check mb-3 tema-checkbox" style="display: none;">
-                                    <input type="checkbox" class="form-check-input" id="tema_{{ $temas->id }}"
-                                        name="temas[]" value="{{ $temas->id }}">
+                @if (!$temas->exclusivoForum)
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body d-flex flex-column">
+                                <div class="row g-0 flex-grow-1">
+                                    <div class="form-check mb-3 tema-checkbox" style="display: none;">
+                                        <input type="checkbox" class="form-check-input" id="tema_{{ $temas->id }}"
+                                            name="temas[]" value="{{ $temas->id }}">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img src="{{ asset($temas->icons) }}" class="img-fluid rounded-start"
+                                            alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h5 class="fonteBold">{{ $temas->nome }}</h5>
+                                        <p class="fontePrincipal">{{ $temas->descricao }}</p>
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <img src="{{ asset( $temas->icons) }}" class="img-fluid rounded-start" alt="...">
+                                <div class="mt-auto text-center w-100">
+                                    <a href="{{ route('tema.material', $temas->id) }}"><button
+                                            class="botaoPrincipal rounded-pill px-3" type="button">ir para o
+                                            material</button></a>
                                 </div>
-                                <div class="col-md-8">
-                                    <h5 class="fontePrincipal">{{ $temas->nome }}</h5>
-                                    <p class="fontePrincipal">{{ $temas->descricao }}</p>
-                                </div>
-                            </div>
-                            <div class="mt-auto text-center w-100">
-                                <a href="{{ route('tema.material', $temas->id) }}"><button
-                                        class="botaoPrincipal rounded-pill px-3" type="button">ir para o
-                                        material</button></a>
                             </div>
                         </div>
                     </div>
-                </div>
                 @endif
             @endforeach
             <div id="botaoDeletar" class="text-center mt-4 mb-4" style="display: none;">
