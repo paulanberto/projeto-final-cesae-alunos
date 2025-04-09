@@ -28,7 +28,16 @@ class TagSeeder extends Seeder
             ['nome' => 'PHP', 'id' => '10'],
             ['nome' => 'Base de Dados', 'id' => '11'],
             ['nome' => 'SQL', 'id' => '12'],
-            ['nome' => 'Engenharia de Software', 'id' => '13']
+            ['nome' => 'Engenharia de Software', 'id' => '13'],
+            ['nome' => 'Design Patterns', 'id' => '14'],
+            ['nome' => 'React', 'id' => '15'],
+            ['nome' => 'WordPress', 'id' => '16'],
+            ['nome' => 'JUnit', 'id' => '17'],
+            ['nome' => 'Java', 'id' => '18'],
+            ['nome' => 'Swift', 'id' => '19'],
+            ['nome' => 'Kotlin', 'id' => '20'],
+            ['nome' => 'XML', 'id' => '21'],
+            ['nome' => 'UML', 'id' => '22'],
         ]);
     }
 }

@@ -6,7 +6,7 @@
 @endsection
 {{-- {{dd($categorias)}} --}}
 @section('content')
-    <div style="margin-bottom: 2rem">
+    <div class="forumTitle">
         <h1 class="fontePrincipal">Forum Cesae Alunos</h1>
     </div>
 

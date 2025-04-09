@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('saldo_pontos')->default('8');
+            $table->integer('saldo_pontos')->default('20');
             $table->tinyInteger('user_type')->default('0');
             /* $table->unsignedBigInteger('curso_id')->nullable();
             $table->foreign('curso_id')->references('id')->on('curso'); */

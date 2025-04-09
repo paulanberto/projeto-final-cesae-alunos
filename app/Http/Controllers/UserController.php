@@ -78,7 +78,7 @@ class UserController extends Controller
 
             session(['register_email' => $user->email]);
 
-            return redirect()->route('verification.notice')->with('success', 'Cadastro realizado com sucesso. Por favor, verifique seu e-mail para confirmar o registro.');
+            return redirect()->route('verification.notice')->with('success', 'Cadastro realizado com sucesso. Por favor, verifique o seu e-mail para confirmar o registo.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Ocorreu um erro ao criar o usuário: ' . $e->getMessage())->withInput();
         }
@@ -187,6 +187,7 @@ class UserController extends Controller
     public function updateUser(Request $request, $id)
     {
 
+
         $user = User::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
@@ -196,6 +197,9 @@ class UserController extends Controller
             'email' => 'required|email|regex:/@msft\.cesae\.pt$/|unique:users,email,' . $id,
             'saldo_pontos' => 'required|integer|min:0',
             'user_type' => 'required|integer|in:0,1,2',
+
+
+        
 
         ]);
 
@@ -209,8 +213,11 @@ class UserController extends Controller
                 'ano' => $request->ano,
                 'name' => $request->name,
                 'email' => $request->email,
+
                 'saldo_pontos' => $request->saldo_pontos,
                 'user_type' => $request->user_type
+
+
             ]);
 
             // If a new password is provided, update it

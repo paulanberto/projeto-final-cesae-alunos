@@ -1,6 +1,5 @@
 nav {
     background: linear-gradient(to left, #40155e, #530d6e,#ffffff);
-
     padding: 10px 0;
 }
 
@@ -42,13 +41,13 @@ nav {
 }
 
 .fontePrincipal{
-    color: #7426aa;
+    color: #392465;
     font-weight: 650;
     font-family: 'ChakraPetch-Light', sans-serif;
 }
 
 .fonteBold{
-    color: #7426aa;
+    color: #392465;
     font-weight: 650;
     font-family: 'ChakraPetch-SemiBold', sans-serif;
 }
@@ -60,6 +59,7 @@ nav {
 }
 
 .botaoCancel{
+    margin-top: 5px;
     background-color: white;
     color: #392465;
     border: none;
