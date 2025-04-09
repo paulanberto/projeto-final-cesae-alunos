@@ -136,18 +136,12 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('material')->group(function () {
 
-        Route::get('/', [MaterialController::class, 'index'])->name('material');
 
         //rota para a página de adicionar materiais, feita para adicionar materiais, leva para o formulário de adição
         Route::get('/add', [MaterialController::class, 'addMaterial'])->name('material.add');
 
         //rota para colocar os materiais que criamos no formulário na base de dados
         Route::post('/create', [MaterialController::class, 'createMaterial'])->name('material.create');
-
-
-
-        // Rota para excluir um material
-        Route::delete('/delete/{id}', [MaterialController::class, 'deleteMaterial'])->name('material.delete')->middleware([IsAdminOrModerator::class]);
 
         // Rota para excluir mais de um material ao mesmo tempo
         Route::delete('delete-multiple', [MaterialController::class, 'deleteMaterial'])->name('material.deleteMultiple')->middleware([IsAdminOrModerator::class]);
