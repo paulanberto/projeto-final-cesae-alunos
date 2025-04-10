@@ -58,9 +58,12 @@
                             Informações do Material
                         </div>
                         <div class="card-body">
-                            <p class="fontePrincipal"><strong class="fonteEscura">Categoria:</strong> {{ $post->categoria->nome }}</p>
-                            <p class="fontePrincipal"><strong class="fonteEscura">Enviado por:</strong> {{ $post->user->name }}</p>
-                            <p class="fontePrincipal"><strong class="fonteEscura">Data de criação:</strong> {{ date('d/m/Y H:i', strtotime($post->created_at)) }}</p>
+                            <p class="fontePrincipal"><strong class="fonteEscura">Categoria:</strong>
+                                {{ $post->categoria->nome }}</p>
+                            <p class="fontePrincipal"><strong class="fonteEscura">Enviado por:</strong>
+                                {{ $post->user->name }}</p>
+                            <p class="fontePrincipal"><strong class="fonteEscura">Data de criação:</strong>
+                                {{ date('d/m/Y H:i', strtotime($post->created_at)) }}</p>
 
                             <hr>
 
