@@ -40,7 +40,7 @@ class TemaController extends Controller
         DB::table('categorias')->insert([
             'nome' => $request->nome,
             'descricao' => $request->descricao,
-            'icons' => $iconPath,
+            'icons' => "/storage/".$iconPath,
             'created_at' => now(),
             'updated_at' => now()
         ]);

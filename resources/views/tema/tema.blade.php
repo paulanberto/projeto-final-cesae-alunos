@@ -24,7 +24,6 @@
     @if (Auth::check() && (Auth::user()->isAdmin() || Auth::user()->isModerador()))
         <button id= "botaoSelecionar" class="botaoPrincipal rounded-pill px-3 mt-5" type="button">selecionar</button>
     @endif
-
     <form id="deleteForm" action="{{ route('tema.deleteMultiple') }}" method="POST">
         @method('DELETE')
         @csrf
@@ -40,6 +39,7 @@
                                             name="temas[]" value="{{ $temas->id }}">
                                     </div>
                                     <div class="col-md-4">
+                                        
                                         <img src="{{ asset($temas->icons) }}" class="img-fluid rounded-start"
                                             alt="...">
                                     </div>
