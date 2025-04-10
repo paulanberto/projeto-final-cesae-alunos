@@ -187,53 +187,33 @@ class UserController extends Controller
     public function updateUser(Request $request, $id)
     {
 
-
+        //dd($request->all());
         $user = User::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
             'curso_id' => 'required|exists:cursos,id',
-            'ano' => 'required|integer|digits:4',
+            'ano' => 'integer|digits:4',
             'name' => 'required|string|max:255',
-            'email' => 'required|email|regex:/@msft\.cesae\.pt$/|unique:users,email,' . $id,
             'saldo_pontos' => 'required|integer|min:0',
             'user_type' => 'required|integer|in:0,1,2',
-
-
-        
-
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        try {
-            $user->update([
+        
+            User::where('id', $id)->update([
                 'curso_id' => $request->curso_id,
                 'ano' => $request->ano,
                 'name' => $request->name,
-                'email' => $request->email,
-
                 'saldo_pontos' => $request->saldo_pontos,
                 'user_type' => $request->user_type
-
-
             ]);
 
-            // If a new password is provided, update it
-            if ($request->filled('password')) {
-                $request->validate([
-                    'password' => 'string|confirmed|min:8',
-                ]);
-                $user->update([
-                    'password' => Hash::make($request->password),
-                ]);
-            }
+            
 
-            return redirect()->route('users.view.single', $id)->with('success', 'Usuário atualizado com sucesso.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Ocorreu um erro ao atualizar o usuário: ' . $e->getMessage())->withInput();
-        }
+            return redirect()->route('users.view.single', $id)->with('success', 'Usuário atualizado com sucesso.'); 
     }
 
     public function deleteUserFromDB($id)

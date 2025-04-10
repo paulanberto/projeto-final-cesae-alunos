@@ -28,14 +28,10 @@
                         <div class="form-group mb-3">
                             <label for="name">Nome</label>
                             <input type="text" class="form-control" id="name" name="name"
-                                   value="{{ old('name', $user->name) }}" required>
+                                   value="{{  $user->name }}" required>
                         </div>
 
-                        <div class="form-group mb-3">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                   value="{{ old('email', $user->email) }}" required>
-                        </div>
+                        
 
                         <div class="form-group mb-3">
                             <label for="curso_id">Curso</label>
@@ -43,7 +39,7 @@
                                 <option value="">Sem Curso</option>
                                 @foreach ($cursos as $curso)
                                     <option value="{{ $curso->id }}"
-                                            {{ old('curso_id', $user->curso_id) == $curso->id ? 'selected' : '' }}>
+                                            {{ $curso->id ? 'selected' : '' }}>
                                         {{ $curso->nome }}
                                     </option>
                                 @endforeach
@@ -54,20 +50,23 @@
                             <label for="user_type">Ano de Inscrição</label>
                             <input type="user_type" class="form-control" id="user_type" name="user_type" value="{{ $user->ano }}">
                         </div>
-
-                        <div class="form-group mb-3">
+ 
+                        @if ($user->user_type != 2)
+                            <div class="form-group mb-3">
                             <label for="user_type">Tipo de utilizador</label>
                             <select class="form-control" id="user_type" name="user_type">
-                                <option selected>Selecione o tipo de utilizador</option>
-                                <option value="0">Aluno</option>
-                                <option value="1">Moderador</option>
+                                
+                                <option @if($user->user_type == 0) selected @endif value="0">Aluno</option>
+                                <option @if($user->user_type == 1) selected @endif value="1">Moderador</option>
                             </select>
                         </div>
+                        @endif
+                        
 
                         <div class="form-group mb-3">
                             <label for="saldo_pontos">Pontos</label>
                             <input type="number" class="form-control" id="saldo_pontos" name="saldo_pontos"
-                                   value="{{ old('saldo_pontos', $user->saldo_pontos) }}" required min="0">
+                                   value="{{$user->saldo_pontos}}" required min="0">
                         </div>
 
 
