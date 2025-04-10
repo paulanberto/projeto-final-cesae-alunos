@@ -32,7 +32,7 @@
                             <img src="{{ asset('storage/' . $post->ficheiro) }}" class="img-fluid rounded"
                                 alt="{{ $post->titulo }}">
                         @elseif($fileType === 'video')
-                            <video controls class="w-100 rounded">
+                            <video controls class="w-100 rounded videoplayer">
                                 <source src="{{ asset('storage/' . $post->ficheiro) }}"
                                     type="video/{{ pathinfo($post->ficheiro, PATHINFO_EXTENSION) }}">
                                 Seu navegador não suporta a reprodução de vídeos.
