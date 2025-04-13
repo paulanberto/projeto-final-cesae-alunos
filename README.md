@@ -1,6 +1,6 @@
 # Código Aberto Community
 
-![Código Aberto Logo](./logo.png)
+<img src="./logo.png" height="200" width="200" alt="Código Aberto Community" />
 
 ## Overview
 
